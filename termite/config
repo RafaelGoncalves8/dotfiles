@@ -1,0 +1,29 @@
+[options]
+font = Monospace 11
+
+[colors]
+background = rgba(00, 00, 00, 0.7)
+cursor = #66ff66
+
+##Normal colors##
+#black red green yellow blue magenta cyan white
+color0 = #101010
+color1 = #f92672
+color2 = #a6e22e
+color3 = #fd971f
+color4 = #0080ff
+color5 = #9B48EF
+color6 = #66d9ef
+color7 = #d0d0d0
+
+##Bold colors##
+#black red green yellow blue magenta cyan white
+color8 =  #101010
+color9 =  #f92672
+color10 = #a6e22e
+color11 = #fd971f
+color12 = #0080ff
+color13 = #9B48EF
+color14 = #66d9ef
+color15 = #d0d0d0
+

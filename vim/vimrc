@@ -1,0 +1,108 @@
+"VIMRC
+"""""""""""""""""""""""""""""""
+"    Rafael Goncalves - 2017  "
+"""""""""""""""""""""""""""""""
+
+"""""""""""""""""""
+"" Initialization""
+"""""""""""""""""""
+set nocompatible   " not compatible with vi = more iMprovements
+syntax on          " syntax highlighting
+
+""Leader""
+""""""""""
+nnoremap <SPACE> <Nop>
+let mapleader = "\<Space>"
+
+""Tmux navigation integration""
+"""""""""""""""""""""""""""""""
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+:au FocusLost * :set norelativenumber
+:au FocusGained * :set relativenumber
+
+""Plugins""
+"""""""""""
+filetype off       " turn off and on for proper plugin init
+"source ~/dotfiles/vim/vundle.vim " vundle manager
+filetype plugin indent on
+
+
+"""""""""""""""""
+""Configuration""
+"""""""""""""""""
+" Status and command bar
+set ruler          " show line/column
+set number         " show numbered lines
+set relativenumber " show relative numbers instead
+set showcmd        " show cmd while beeing typed
+set title          " show title on status line
+set laststatus=2   " 2 lines for the status line
+set cmdheight=2    " 2 lines for cmd prompt
+set wildmenu       " better command-line completion(?)
+set wildmode=longest:list,full
+
+" Warnings
+set confirm        " confirm warning before closing
+set visualbell     " instead of sound bell
+
+" Searches
+set hlsearch       " highlight searches
+set ignorecase     " ignore letter cases
+set smartcase      " case-sensitive when with capital letters
+
+" Tabs configured for 4 spaces indent
+set backspace=indent,eol,start  " allow backspacing autoindent
+set shiftwidth=4   " identation = 4 spaces
+set tabstop=4      " tab navigates between 4 spaces gaps
+set expandtab
+set softtabstop=4
+
+" Other useful features
+set hidden         " hide vim buffers instead of closing them
+set scrolloff=3    " lines under and above cursor to show when scrolling
+set mouse=a        " mouse selects switches to visual mode
+let g:netrw_liststyle=3 " better style for explore mode :Explore
+
+
+""""""""""""
+""Mappings""
+""""""""""""
+" Window navigation
+nmap <C-j> <C-w>j
+nmap <C-k> <C-w>k
+nmap <C-l> <C-w>l
+nmap <C-h> <C-w>h
+
+" Panes and Buffers
+" List buffers
+nmap <leader>ls :ls<cr>
+" Next/Previous buffer
+nmap <leader>b :bNext<cr>
+" Window creation
+nmap <leader>down  :split<CR><c-w>j
+nmap <leader>right :vsplit<CR><c-w>l
+
+" Easier copy/paste from system clipboard
+" vmap <Leader>y "+y
+" vmap <Leader>d "+d
+" nmap <Leader>p "+p
+" nmap <Leader>P "+P
+" vmap <Leader>p "+p
+" vmap <Leader>P "+P
+
+" Other useful keybindings
+nnoremap <leader>w :w<cr>
+nnoremap <leader>q :q<cr>
+nnoremap <leader>n :set invrelativenumber<cr>
+nnoremap <leader>h :set nohl<CR>
+
+""""""""""
+""Layout""
+""""""""""
+let &colorcolumn="80,".join(range(81,999),",") "line warnings 80
+highlight ColorColumn ctermbg=none cterm=bold guibg=#2c2d27
+set background=dark
+
+highlight LineNr ctermfg=244
+

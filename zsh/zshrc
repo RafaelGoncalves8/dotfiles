@@ -1,0 +1,138 @@
+#######################
+### ZSH CONFIG FILE ###
+#######################
+
+## Variables ##
+###############
+export DOTFILES=$HOME/dotfiles
+
+export INBOX=$HOME/inbox
+export ARCHIVE=$HOME/archive
+export MEDIA=$HOME/media
+export IMAGES=$HOME/media/img
+export MUSIC=$HOME/media/mus
+
+export BUILDS=$HOME/builds
+export SCRIPTS=$HOME/scripts
+export BIN=$HOME/bin
+export TMP=$HOME/tmp
+
+export PATH=$PATH:BUILDS:SCRIPTS:BIN
+
+export EDITOR="vim"
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+
+#export TERM="termite"
+
+source $HOME/.greengrocer.sh
+
+## Configuration ##
+###################
+
+bindkey -v                  # Vim like bindings
+
+setopt RM_STAR_WAIT         # Wait if rm something
+setopt interactivecomments  # Allow comments in shell with '#'
+
+#History
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+setopt HIST_IGNORE_DUPS     # Ignore duplicates
+
+#Auto-completion
+zstyle :compinstall filename 'home/rafael/.zshrc'
+autoload -Uz    compinit
+compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}' #case insensitive
+
+#Globbing
+setopt NO_CASE_GLOB
+setopt EXTENDED_GLOB
+setopt NUMERIC_GLOB_SORT
+
+#Unicode
+source $DOTFILES/zsh/unicode.zsh
+
+#Prompt
+set PROMPT_SUBST
+set PROMPT_BANG
+set PROMPT_PERCENT
+
+autoload -U colors && colors
+autoload -Uz promptinit
+promptinit
+
+autoload -Uz chpwd_recent_dirs cdr add-zsh-hook
+add-zsh-hook chpwd chpwd_recent_dirs
+
+##White Prompt
+#PROMPT='[%n@%m %{$fg_bold[white]%}%1~%{$reset_color%}]%(!.#.$) ' 
+##Cyan Prompt
+#PROMPT='%{$fg[cyan]%}[%n@%m %{$fg_bold[cyan]%}%1~%{$reset_color%}%{$fg[cyan]%}]%(!.#.$) %{$reset_color%}'
+
+##Pink Prompt
+PROMPT='%{$fg[red]%}[%n@%m %{$fg_bold[red]%}%1~%{$reset_color%}%{$fg[red]%}]%(!.#.$) %{$reset_color%}'
+
+#Git-RPrompt
+#autoload -Uz vcs_info
+#zstyle ':vcs_info:*' enable git svn
+#precmd () { vcs_info }
+#setopt prompt_subst
+#RPROMPT='${vcs_info_msg_0_} %(1j.[%j].)'
+
+source $DOTFILES/zsh/gitstatus.sh
+export PATH=$PATH:$HOME/builds:$HOME/bin:$HOME/scripts
+RPROMPT='$(git_super_status) %(1j.[%j].)'
+
+#Google
+## The next line updates PATH for the Google Cloud SDK.
+#if [ -f /home/rafael/builds/google-cloud-sdk/path.zsh.inc ]; then
+#  source '/home/rafael/builds/google-cloud-sdk/path.zsh.inc'
+#fi
+#
+## The next line enables shell command completion for gcloud.
+#if [ -f /home/rafael/builds/google-cloud-sdk/completion.zsh.inc ]; then
+#  source '/home/rafael/builds/google-cloud-sdk/completion.zsh.inc'
+#fi
+
+## Aliases ##
+#############
+
+#sudo
+insert_sudo () { zle beginning-of-line; zle -U "sudo " }
+zle -N insert-sudo insert_sudo
+bindkey "^[s" insert-sudo
+
+#common comands
+alias -g ls="ls --color"
+alias -g la="ls -la --color"
+alias -g grep="grep --color"
+
+#cd
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+
+alias inbox="pushd $INBOX"
+alias archive="pushd $ARCHIVE"
+alias media="pushd $MEDIA"
+alias dotfiles="pushd $DOTFILES"
+alias img="pushd $IMAGES"
+alias mus="pushd $MUSIC"
+alias builds="pushd $BUILDS"
+alias scripts="pushd $SCRIPTS"
+alias bin="pushd $BIN"
+alias tmp="pushd $TMP"
+
+#editing conf files
+alias zshrc="$EDITOR $DOTFILES/zsh/zshrc"
+alias vimrc="$EDITOR $DOTFILES/vim/vimrc"
+alias tmuxconf="$EDITOR $DOTFILES/tmux/conf"
+alias termiteconf="$EDITOR $HOME/.config/termite/config"
+alias i3conf="$EDITOR $HOME/.config/i3/config"
+alias rangerc="$EDITOR $HOME/.config/ranger/rc.conf"
+
+
