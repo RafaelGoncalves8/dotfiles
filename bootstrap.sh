@@ -15,7 +15,7 @@ files=(
 "zsh/zshrc"
 "termite/config"
 "vim/vimrc"
-"vim/vim"
+"vim/vim/"
 "tmux/conf"
 "git/config"
 "ranger/rc.conf"
@@ -47,6 +47,7 @@ mkdir -p $olddir/zsh
 mkdir -p $olddir/termite
 mkdir -p $olddir/vim
 mkdir -p $olddir/tmux
+mkdir -p $olddir/git
 mkdir -p $olddir/ranger
 mkdir -p $olddir/i3
 mkdir -p $olddir/i3status
@@ -65,7 +66,9 @@ echo
 for ((i=1; i <= ${#files[@]}; i++));do
 
     echo "moving ${target[i]} to $olddir/${files[i]}..."
+    mv ${target[i]} "$olddir/${files[i]}"
     echo "linking $dir/${files[i]} to ${target[i]}"
+    ln -s "$dir/${files[i]}" ${target[i]}
     echo "...done"
 
 done
