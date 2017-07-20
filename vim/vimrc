@@ -1,37 +1,40 @@
-"VIMRC
-"""""""""""""""""""""""""""""""
-"    Rafael Goncalves - 2017  "
-"""""""""""""""""""""""""""""""
+"       _
+"__   _(_)_ __ ___  _ __ ___
+"\ \ / / | '_ ` _ \| ' _/ __|
+" \ V /| | | | | | | | | (__
+"  \_/ |_|_| |_| |_|_|  \___|
 
-"""""""""""""""""""
-"" Initialization""
-"""""""""""""""""""
+"""""""""""""""""""""""""""""""""
+"    Rafael Goncalves - 2017    "
+"""""""""""""""""""""""""""""""""
+
+""""""""""""""""""
+""Initialization""
+""""""""""""""""""
+
 set nocompatible   " not compatible with vi = more iMprovements
 syntax on          " syntax highlighting
+set encoding=utf-8 " in case $LANG is not properly definded
 
 ""Leader""
 """"""""""
 nnoremap <SPACE> <Nop>
 let mapleader = "\<Space>"
 
-""Tmux navigation integration""
-"""""""""""""""""""""""""""""""
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
-:au FocusLost * :set norelativenumber
-:au FocusGained * :set relativenumber
-
 ""Plugins""
 """""""""""
 filetype off       " turn off and on for proper plugin init
-"source ~/dotfiles/vim/vundle.vim " vundle manager
+source ~/dotfiles/vim/vundle.vim " vundle manager
 filetype plugin indent on
+
 
 
 """""""""""""""""
 ""Configuration""
 """""""""""""""""
-" Status and command bar
+
+""Status and command bar""
+""""""""""""""""""""""""""
 set ruler          " show line/column
 set number         " show numbered lines
 set relativenumber " show relative numbers instead
@@ -39,70 +42,143 @@ set showcmd        " show cmd while beeing typed
 set title          " show title on status line
 set laststatus=2   " 2 lines for the status line
 set cmdheight=2    " 2 lines for cmd prompt
-set wildmenu       " better command-line completion(?)
-set wildmode=longest:list,full
+set wildmenu       " better command-bar completion
 
-" Warnings
+""Warnings""
+""""""""""""
 set confirm        " confirm warning before closing
 set visualbell     " instead of sound bell
 
-" Searches
+""Searches""
+""""""""""""
 set hlsearch       " highlight searches
 set ignorecase     " ignore letter cases
 set smartcase      " case-sensitive when with capital letters
 
-" Tabs configured for 4 spaces indent
+""Backups""
+"""""""""""
+set backupdir=~/.vim/backup
+set directory=~/.vim/backup
+
+""Tabs and Backspaces""
+"""""""""""""""""""""""
 set backspace=indent,eol,start  " allow backspacing autoindent
 set shiftwidth=4   " identation = 4 spaces
 set tabstop=4      " tab navigates between 4 spaces gaps
 set expandtab
 set softtabstop=4
 
-" Other useful features
+""Buffers""
+"""""""""""
 set hidden         " hide vim buffers instead of closing them
+
+" Reload file without prompting if it has changed on disk.
+" Will still prompt if there is unsaved text in the buffer.
+set autoread
+" Do it when switching buffers
+au WinEnter,BufWinEnter,CursorHold * silent! checktime
+
+" Automatically save buffers
+set autowrite
+" When switching to another or leaving focus
+au BufLeave,FocusLost * silent! wa
+
+""Other useful features""
+"""""""""""""""""""""""""
+set listchars=nbsp:·,tab:▸\ ,trail:·  " Configure how invisibles appear.
+set list           " show blank chars
 set scrolloff=3    " lines under and above cursor to show when scrolling
 set mouse=a        " mouse selects switches to visual mode
 let g:netrw_liststyle=3 " better style for explore mode :Explore
+set exrc           " Enable per-directory .vimrc files.
+set secure         " Disable unsafe commands in per-directory .vimrc files.
+
 
 
 """"""""""""
 ""Mappings""
 """"""""""""
-" Window navigation
+
+""Window navigation""
+"""""""""""""""""""""
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <C-h> <C-w>h
 
-" Panes and Buffers
+""Panes and Buffers""
+"""""""""""""""""""""
 " List buffers
-nmap <leader>ls :ls<cr>
+" nmap <leader>ls :ls<cr> "useless w/ airline plugin
 " Next/Previous buffer
-nmap <leader>b :bNext<cr>
+nmap <leader>b :bn<cr>
+nmap <leader>B :bp<cr>
+" Close current buffer
+nmap <leader>d :bd
 " Window creation
-nmap <leader>down  :split<CR><c-w>j
-nmap <leader>right :vsplit<CR><c-w>l
+nmap <leader>h  :leftabove vsp<CR><c-w>h
+nmap <leader>l :rightbelow vsp<CR><c-w>l
+nmap <leader>j  :rightbelow sp<CR><c-w>j
+nmap <leader>k    :leftabove sp<CR><c-w>k
+" New window creation
+nmap <leader>nh :leftabove vsp<CR><c-w>h :Explore<CR>
+nmap <leader>nl :rightbelow vsp<CR><c-w>l :Explore<CR>
+nmap <leader>nj :rightbelow sp<CR><c-w>j :Explore<CR>
+nmap <leader>nk :leftabove sp<CR><c-w>k :Explore<CR>
+" Load new in same window
+nmap <leader>nn :Explore<CR>
 
+""Copy-Paste""
+""""""""""""""
 " Easier copy/paste from system clipboard
-" vmap <Leader>y "+y
-" vmap <Leader>d "+d
-" nmap <Leader>p "+p
-" nmap <Leader>P "+P
-" vmap <Leader>p "+p
-" vmap <Leader>P "+P
+vmap <leader>y "+y
+vmap <leader>d "+d
+nmap <leader>p "+p
+nmap <leader>P "+P
+vmap <leader>p "+p
+vmap <leader>P "+P
+
+""Structure""
+"""""""""""""
+" Keep selection when indenting in v-mode
+vnoremap > >gv
+vnoremap < <gv
+
+" Adding blank lines before/after cursor
+nnoremap <leader>o o<ESC>
+nnoremap <leader>O O<ESC>
 
 " Other useful keybindings
 nnoremap <leader>w :w<cr>
+nnoremap <leader>W :w !sudo tee % > /dev/null<CR>
 nnoremap <leader>q :q<cr>
-nnoremap <leader>n :set invrelativenumber<cr>
-nnoremap <leader>h :set nohl<CR>
+nnoremap <leader>Q :q!<cr>
+nnoremap <leader>m :set invrelativenumber<cr>
+nnoremap <leader>h :nohl<CR>
+nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
+
+
+""""""""""
+""Others""
+""""""""""
+
+""Relative number toggles""
+"""""""""""""""""""""""""""
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+:au FocusLost * :set norelativenumber
+:au FocusGained * :set relativenumber
+
+
 
 """"""""""
 ""Layout""
 """"""""""
-let &colorcolumn="80,".join(range(81,999),",") "line warnings 80
-highlight ColorColumn ctermbg=none cterm=bold guibg=#2c2d27
-set background=dark
 
+set background=dark
 highlight LineNr ctermfg=244
 
+" Indication for 80 characters width
+let &colorcolumn="80,".join(range(81,999),",") "line warnings 80
+highlight ColorColumn ctermbg=none cterm=bold guibg=#2c2d27

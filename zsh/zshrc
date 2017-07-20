@@ -1,21 +1,25 @@
-#######################
-### ZSH CONFIG FILE ###
-#######################
+#         _
+# _______| |__  _ __ ___
+#|_  / __| '_ \| '__/ __|
+# / /\__ \ | | | | | (__
+#/___|___/_| |_|_|  \___|
+
+#########################
+# Rafael Goncalves 2017 #
+#########################
 
 ## Variables ##
 ###############
-export DOTFILES=$HOME/dotfiles
-
 export INBOX=$HOME/inbox
 export ARCHIVE=$HOME/archive
 export MEDIA=$HOME/media
 export IMAGES=$HOME/media/img
 export MUSIC=$HOME/media/mus
-
 export BUILDS=$HOME/builds
 export SCRIPTS=$HOME/scripts
 export BIN=$HOME/bin
 export TMP=$HOME/tmp
+export DOTFILES=$HOME/dotfiles
 
 export PATH=$PATH:BUILDS:SCRIPTS:BIN
 
@@ -23,9 +27,10 @@ export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-#export TERM="termite"
+export TERM=xterm-256color
 
 source $HOME/.greengrocer.sh
+
 
 ## Configuration ##
 ###################
@@ -116,6 +121,7 @@ alias -g ...='../..'
 alias -g ....='../../..'
 alias -g .....='../../../..'
 
+#common places
 alias inbox="pushd $INBOX"
 alias archive="pushd $ARCHIVE"
 alias media="pushd $MEDIA"
