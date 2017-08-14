@@ -61,17 +61,24 @@ echo "...done"
 echo
 
 # make backup and link files
-echo "Moving existing dotfiles to $olddir and making links:"
+echo "Moving existing dotfiles to $olddir:"
 echo
 for ((i=1; i <= ${#files[@]}; i++));do
 
     echo "moving ${target[i]} to $olddir/${files[i]}..."
     mv ${target[i]} "$olddir/${files[i]}"
-    echo "linking $dir/${files[i]} to ${target[i]}"
-    ln -s "$dir/${files[i]}" ${target[i]}
     echo "...done"
 
 done
+
+rm -rf $HOME/vim # dont let recursive symlinks be done in vim folder
+
+echo "Making links:"
+echo
+for ((i=1; i <= ${#files[@]}; i++));do
+    echo "linking $dir/${files[i]} to ${target[i]}"
+    ln -s "$dir/${files[i]}" ${target[i]}
+    echo "...done"
 echo
 echo "all links done"
 

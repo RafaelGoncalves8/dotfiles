@@ -110,7 +110,7 @@ nmap <C-h> <C-w>h
 
 ""Navigation in buffer""
 """"""""""""""""""""""""
-inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
+" inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
 vnoremap <Space><Space> <Esc>/<++><Enter>"_c4l
 map <Space><Space> <Esc>/<++><Enter>"_c4l
 inoremap ;mrk <++>
