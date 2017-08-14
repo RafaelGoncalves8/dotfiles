@@ -44,6 +44,9 @@ set laststatus=2   " 2 lines for the status line
 set cmdheight=2    " 2 lines for cmd prompt
 set wildmenu       " better command-bar completion
 
+""Behaviout""
+"""""""""""""
+set scrolloff=5    " lines under and above cursor to show when scrolling
 ""Warnings""
 """"""""""""
 set confirm        " confirm warning before closing
@@ -87,7 +90,6 @@ au BufLeave,FocusLost * silent! wa
 """""""""""""""""""""""""
 set listchars=nbsp:·,tab:▸\ ,trail:·  " Configure how invisibles appear.
 set list           " show blank chars
-set scrolloff=3    " lines under and above cursor to show when scrolling
 set mouse=a        " mouse selects switches to visual mode
 let g:netrw_liststyle=3 " better style for explore mode :Explore
 set exrc           " Enable per-directory .vimrc files.
@@ -106,10 +108,22 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <C-h> <C-w>h
 
+""Navigation in buffer""
+""""""""""""""""""""""""
+inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
+vnoremap <Space><Space> <Esc>/<++><Enter>"_c4l
+map <Space><Space> <Esc>/<++><Enter>"_c4l
+inoremap ;mrk <++>
+nnoremap <leader>x i<++>
+
 ""Panes and Buffers""
 """""""""""""""""""""
 " List buffers
 " nmap <leader>ls :ls<cr> "useless w/ airline plugin
+" New empty buffer
+nmap <leader>N :tabnew<cr>
+" New buffer w/ tree of directories
+nmap <leader>ne :tabnew<cr>:Explore<cr>
 " Next/Previous buffer
 nmap <leader>b :bn<cr>
 nmap <leader>B :bp<cr>
@@ -156,6 +170,7 @@ nnoremap <leader>Q :q!<cr>
 nnoremap <leader>m :set invrelativenumber<cr>
 nnoremap <leader>H :nohl<CR>
 nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+map <F6> :setlocal spell! spelllang=en_us<CR>
 
 
 
@@ -167,8 +182,8 @@ nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <B
 """""""""""""""""""""""""""
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
-:au FocusLost * :set norelativenumber
-:au FocusGained * :set relativenumber
+au FocusLost * :set norelativenumber
+au FocusGained * :set relativenumber
 
 
 
