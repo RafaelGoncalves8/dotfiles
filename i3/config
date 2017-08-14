@@ -1,156 +1,122 @@
-# _ ____                     __ _
-#(_)__  |    ___ ___  _ __  / _(_) __ _
-#| | / /    / __/ _ \| '_ \| |_| |/ _` |
-#| ||__ \  | (_| (_) | | | |  _| | (_| |
-#|_|___) |  \___\___/|_| |_|_| |_|\__, |
-# |_____/                         |___/
+# _ ____                    __ _
+#(_)__  |   ___ ___  _ __  / _(_) __ _
+#| | / /   / __/ _ \| '_ \| |_| |/ _` |
+#| ||__ \ | (_| (_) | | | |  _| | (_| |
+#|_|___) | \___\___/|_| |_|_| |_|\__, |
+# |_____/                        |___/
 
 #=======================================#
 #       Rafael Goncalves - 2017         #
 #=======================================#
 
 #=======================================
-# General Configuration
-#=======================================
-# Variables
-#=================
-# alt; super
-set $mod  Mod1
+# General Configuration ================
+# ======================= Variables ================= alt; super
+set $mod Mod1
 set $mod2 Mod4
 
 # Workspace name tags
-set $ws0  workspace 0:admn
-set $ws1  workspace 1:home
-set $ws2  workspace 2:web 
-set $ws3  workspace 3:fm  
-set $ws4  workspace 4:mail
-set $ws5  workspace 5:code
-set $ws6  workspace 6:code
-set $ws7  workspace 7:
-set $ws8  workspace 8:
-set $ws9  workspace 9:
-set $ws10 workspace 10:
+set $ws0 workspace 0:admn set $ws1 workspace 1:home set $ws2 workspace 2:web set $ws3 workspace 3:fm set 
+$ws4 workspace 4:mail set $ws5 workspace 5:code set $ws6 workspace 6:code set $ws7 workspace 7: set $ws8 
+workspace 8: set $ws9 workspace 9: set $ws10 workspace 10:N+
 
 # bg and lock img
-set $bg ~/media/.bg
-set $lock ~/media/.lock.png
+set $bg ~/media/.bg set $lock ~/media/.lock.png
 
 #colors
-set $black   "#101010"
-set $red     "#f92672"
-set $green   "#a6e22e"
-set $yellow  "#fd971f"
-set $blue    "#0080ff"
-set $magenta "#9B48EF"
-set $cyan    "#66d9ef"
-set $white   "#d0d0d0"
+set $black "#101010" set $red "#f92672" set $green "#a6e22e" set $yellow "#fd971f" set $blue "#0080ff" 
+set $magenta "#9B48EF" set $cyan "#66d9ef" set $white "#d0d0d0"
 
-# Execs at startup
-#=================
-# default workspace
-exec i3-msg $ws1
+# Execs at startup ================= default workspace
+exec --no-startup-id i3-msg $ws1
 # windom composition manager
-exec_always xcompmgr -c -f -n -D 3
+exec_always --no-startup-id xcompmgr -c -f -n -D 3
 # bg
 exec --no-startup-id feh --bg-fill $bg
 # redshift
 exec --no-startup-id redshift
+# cmus on scratch-1
+exec --no-startup-id termite --name="scratch-mus" -e cmus
 # pulseaudio
-exec --no-startup-id "devmon --no-gui"
-exec --no-startup-id "pulseaudio --start"
+exec --no-startup-id "devmon --no-gui" exec --no-startup-id "pulseaudio --start"
+# sync and launch calcurse
+exec --no-startup-id "~/scripts/sync-cal.sh" exec --no-startup-id termite --name="scratch-cal" -e 
+calcurse
 
-# Binds
-#=================
-# For mouse
+# Binds ================= For mouse
 floating_modifier $mod
 
 # dmenu
 bindsym $mod+d exec --no-startup-id dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# reload the configuration file
-bindsym $mod+Ctrl+c reload
-# restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
-bindsym $mod+Shift+r restart
-# exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'Exit now?' -b 'Yes, exit i3' 'i3-msg exit'"
-
 # screenshots on media/img/screenshots
-bindsym --release Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/img/screenshots/'
-bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/img/screenshots/'
-bindsym --release $mod+Print exec scrot -u '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/img/screenshots/'
+bindsym --release Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/img/screenshots/' 
+bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f 
+~/media/img/screenshots/' bindsym --release $mod+Print exec scrot -u '%Y-%m-%d-%T_$wx$h_scrot.png' -e 
+'mv $f ~/media/img/screenshots/'
 
 #i3lock
 bindsym Ctrl+$mod+space exec i3lock -d -i $lock -u -c 333333 -e -f
 
 # Scratchpad
-bindsym $mod+Shift+minus move scratchpad
-bindsym $mod+minus scratchpad show
+bindsym $mod+Shift+minus move scratchpad bindsym $mod+minus scratchpad show
 
-# Applications launching
-#=================
-bindsym $mod+Return exec termite
-bindsym $mod+Shift+Return exec termite --name="float"
+# Applications launching =================
+bindsym $mod+Return exec termite bindsym $mod+Shift+Return exec termite --name="float"
 
-bindsym $mod+w exec firefox
-bindsym $mod+Shift+w exec qutebrowser
+bindsym $mod+w exec i3-msg exec firefox; mark ws2; $ws2 bindsym $mod+Shift+w exec i3-msg exec 
+qutebrowser; mark ws2; $ws2
 
-bindsym $mod+Shift+f exec pcmanfm
-bindsym $mod+Shift+Ctrl+f  exec gksu pcmanfm
-bindsym $mod+f exec "termite -e ranger"
-bindsym $mod+Ctrl+f exec "termite -e sudo ranger"
+bindsym $mod+Shift+f exec i3-msg exec pcmanfm; mark ws3; $ws3 bindsym $mod+Shift+Ctrl+f exec i3-msg gksu 
+pcmanfm; mark ws3; $ws3 bindsym $mod+f exec "termite -e ranger" bindsym $mod+Ctrl+f exec "termite -e 
+sudo ranger" bindsym $mod+Shift+d exec termite -e ranger --name="float"
 
-bindsym $mod+e exec "termite -e vim"
-bindsym $mod+Ctrl+e  "exec termite -e sudo vim"
+bindsym $mod+e exec "termite -e vim" bindsym $mod+Ctrl+e "exec termite -e sudo vim" bindsym $mod+Shift+e 
+exec "kate"
 
-bindsym $mod+m exec termite --name="cmus-ws10" -e cmus
-bindsym $mod+Shift+m exec thunderbird
+bindsym $mod+Shift+m exec i3-msg exec thunderbird; mark ws4; $ws4
+
+bindsym $mod+n exec i3-msg exec nicotine; mark ws10; $ws10
 
 ## Scratchpad specifics
-# F1    Music   cmus
-# F2    Email   mutt
-# F3    Calend  calcurse
-# F4    IRC     weechat
-# F5    Torrent transmission
-# F6-F12 term   termite    
+# F1 Music cmus F2 Email mutt F3 Calend calcurse F4 IRC weechat F5 Torrent transmission F6-F12 term 
+# termite
 
-bindsym Shift+F1 exec termite --name="scratch-mus"  -e cmus
-bindsym Shift+F2 exec termite --name="scratch-mail" -e mutt
-bindsym Shift+F3 exec termite --name="scratch-cal"  -e calcurse
-bindsym Shift+F4 exec termite --name="scratch-irc"  -e weechat
-bindsym Shift+F5 exec termite --name="scratch-tor"  -e transmission
+bindsym Shift+F1 exec termite --name="scratch-mus" -e cmus bindsym Shift+F2 exec termite 
+--name="scratch-mail" -e mutt bindsym Shift+F3 exec termite --name="scratch-cal" -e calcurse bindsym 
+Shift+F4 exec termite --name="scratch-irc" -e weechat bindsym Shift+F5 exec termite --name="scratch-tor" 
+-e transmission
 
-bindsym Shift+F6  exec termite --name="scratch-term-6"
-bindsym Shift+F7  exec termite --name="scratch-term-7"
-bindsym Shift+F8  exec termite --name="scratch-term-8"
-bindsym Shift+F9  exec termite --name="scratch-term-9"
-bindsym Shift+F10 exec termite --name="scratch-term-10"
-bindsym Shift+F11 exec termite --name="scratch-term-11"
-bindsym Shift+F12 exec termite --name="scratch-term-12"
+bindsym Shift+F6 exec termite --name="scratch-term-6" bindsym Shift+F7 exec termite 
+--name="scratch-term-7" bindsym Shift+F8 exec termite --name="scratch-term-8" bindsym Shift+F9 exec 
+termite --name="scratch-term-9" bindsym Shift+F10 exec termite --name="scratch-term-10" bindsym 
+Shift+F11 exec termite --name="scratch-term-11" bindsym Shift+F12 exec termite --name="scratch-term-12"
 
-bindsym $mod+F1  exec "i3-msg '[instance=scratch-mus] scratchpad show'"
-bindsym $mod+F2  exec "i3-msg '[instance=scratch-mail] scratchpad show'"
-bindsym $mod+F3  exec "i3-msg '[instance=scratch-cal] scratchpad show'"
-bindsym $mod+F4  exec "i3-msg '[instance=scratch-irc] scratchpad show'"
-bindsym $mod+F5  exec "i3-msg '[instance=scratch-tor] scratchpad show'"
+bindsym $mod+F1 exec "i3-msg '[instance=scratch-mus] scratchpad show'" bindsym $mod+F2 exec "i3-msg 
+'[instance=scratch-mail] scratchpad show'" bindsym $mod+F3 exec "i3-msg '[instance=scratch-cal] 
+scratchpad show'" bindsym $mod+F4 exec "i3-msg '[instance=scratch-irc] scratchpad show'" bindsym $mod+F5 
+exec "i3-msg '[instance=scratch-tor] scratchpad show'"
 
-bindsym $mod+F6  exec "i3-msg '[instance=scratch-term-6 ] scratchpad show'"
-bindsym $mod+F7  exec "i3-msg '[instance=scratch-term-7 ] scratchpad show'"
-bindsym $mod+F8  exec "i3-msg '[instance=scratch-term-8 ] scratchpad show'"
-bindsym $mod+F9  exec "i3-msg '[instance=scratch-term-9 ] scratchpad show'"
-bindsym $mod+F10 exec "i3-msg '[instance=scratch-term-10] scratchpad show'"
-bindsym $mod+F11 exec "i3-msg '[instance=scratch-term-11] scratchpad show'"
-bindsym $mod+F12 exec "i3-msg '[instance=scratch-term-12] scratchpad show'"
+bindsym $mod+F6 exec "i3-msg '[instance=scratch-term-6 ] scratchpad show'" bindsym $mod+F7 exec "i3-msg 
+'[instance=scratch-term-7 ] scratchpad show'" bindsym $mod+F8 exec "i3-msg '[instance=scratch-term-8 ] 
+scratchpad show'" bindsym $mod+F9 exec "i3-msg '[instance=scratch-term-9 ] scratchpad show'" bindsym 
+$mod+F10 exec "i3-msg '[instance=scratch-term-10] scratchpad show'" bindsym $mod+F11 exec "i3-msg 
+'[instance=scratch-term-11] scratchpad show'" bindsym $mod+F12 exec "i3-msg '[instance=scratch-term-12] 
+scratchpad show'"
 
-# System mode
-#=================
-set $mode_system System (l) lock, (e) logout, (s) suspend, (h) hibernate, (r) reboot, (Shift+s) shutdown
-mode "$mode_system" {
-    bindsym l exec --no-startup-id i3exit lock, mode "default"
+# System mode =================
+set $mode_system System (c) reload, (r) restart, (e) logout, (s) suspend, (h) hibernate, (Shift+r) 
+reboot, (Shift+s) shutdown mode "$mode_system" {
+    # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
+    bindsym r restart , mode "default"
+    # reload the configuration file
+    bindsym c reload, mode "default"
+    # exit i3 (logs you out of your X session)
     bindsym e exec --no-startup-id i3exit logout, mode "default"
     bindsym s exec --no-startup-id i3exit suspend, mode "default"
     bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
+    bindsym Shift+r exec --no-startup-id i3exit reboot, mode "default"
     bindsym Shift+s exec --no-startup-id systemctl poweroff
 
     # back to normal: Enter or Escape
@@ -160,47 +126,37 @@ mode "$mode_system" {
 
 bindsym $mod+p mode "$mode_system"
 
-#bindsym $mod+t exec transmission-gtk
 #=======================================
-# Windows
-#=======================================
-# Font
-#=================
-#font pango:monospace 10
+# Windows ======================================= Assignments =================
+assign [con_mark="ws2"] $ws2 assign [con_mark="ws3"] $ws3 assign [con_mark="ws4"] $ws4 assign 
+[con_mark="ws10"] $ws10
+
+for_window [instance="float"] floating enable for_window [window_role="pop-up"] floating enable 
+for_window [window_role="task_dialog"] floating enable
+
+for_window [urgent=latest] focus for_window [instance="scratch"] move scratchpad
+
+# Font ================= font pango:monospace 10
 font pango:DejaVu Sans Mono 10
 
 
 # Borders #=================
 new_window pixel 1
 
-# Colors
-#=================      
-#class                  border   background   text    indicator  child_border
-client.focused          $cyan     $cyan      $black   $green     $cyan 
-client.focused_inactive $black    $black     $white   $green     $black
-client.unfocused        $black    $black     $white   $green     $black
-client.urgent           $red      $red       $white   $magenta   $red
-client.placeholder      $black    $black     $white   $green     $black
-client.background       $black
+# Colors ================= class border background text indicator child_border
+client.focused $cyan $cyan $black $green $cyan client.focused_inactive $black $black $white $green 
+$black client.unfocused $black $black $white $green $black client.urgent $red $red $white $magenta $red 
+client.placeholder $black $black $white $green $black client.background $black
 
-# Movements
-#=================
-# kill focused window
-bindsym $mod+Shift+q kill
-bindsym $mod+q kill
-bindsym $mod2+q kill
+# Movements ================= kill focused window
+bindsym $mod+Shift+q kill bindsym $mod+q kill bindsym $mod2+q kill
 
 # change focus
-bindsym $mod+h focus left
-bindsym $mod+j focus down
-bindsym $mod+k focus up
-bindsym $mod+l focus right
+bindsym $mod+h focus left bindsym $mod+j focus down bindsym $mod+k focus up bindsym $mod+l focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left bindsym $mod+Shift+j move down bindsym $mod+Shift+k move up bindsym 
+$mod+Shift+l move right
 
 # split in horizontal orientation
 bindsym $mod+Right split h
@@ -212,9 +168,8 @@ bindsym $mod+Down split v
 bindsym $mod+x fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+Ctrl+t layout stacking
-bindsym $mod+Shift+t layout tabbed
-bindsym $mod+t layout toggle split
+bindsym $mod+Ctrl+t layout stacking bindsym $mod+Shift+t layout tabbed bindsym $mod+t layout toggle 
+split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -229,95 +184,49 @@ bindsym $mod+a focus parent
 bindsym $mod+s focus child
 
 #=======================================
-# Workspaces
-#=======================================
-# Assignments
-#=================
-assign [class="Firefox"]     $ws2
-assign [class="qutebrowser"] $ws2
-assign [class="Thunderbird"] $ws4
-
-for_window [urgent=latest]       focus
-for_window [class="Firefox"]     focus
-for_window [class="qutebrowser"] focus
-for_window [class="Thunderbird"] focus
-
-for_window [instance="float"]          floating toggle
-for_window [window_role="pop-up"]      floating enable
-for_window [window_role="task_dialog"] floating enable
-
-for_window [instance="scratch"] move scratchpad
-
-# Movements
-#=================
-# Next, Previous
-bindsym $mod+Tab workspace next
-bindsym $mod+Shift+Tab workspace prev
+# Workspaces ======================================= Movements ================= Next, Previous
+bindsym $mod+Tab workspace next bindsym $mod+Shift+Tab workspace prev
 
 # Switch to workspace
-bindsym $mod+grave $ws0
-bindsym $mod+1     $ws1
-bindsym $mod+2     $ws2
-bindsym $mod+3     $ws3
-bindsym $mod+4     $ws4
-bindsym $mod+5     $ws5
-bindsym $mod+6     $ws6
-bindsym $mod+7     $ws7
-bindsym $mod+8     $ws8
-bindsym $mod+9     $ws9
-bindsym $mod+0     $ws10
+bindsym $mod+grave $ws0 bindsym $mod+1 $ws1 bindsym $mod+2 $ws2 bindsym $mod+3 $ws3 bindsym $mod+4 $ws4 
+bindsym $mod+5 $ws5 bindsym $mod+6 $ws6 bindsym $mod+7 $ws7 bindsym $mod+8 $ws8 bindsym $mod+9 $ws9 
+bindsym $mod+0 $ws10
 
 # Move focused container to workspace
-bindsym $mod+shift+grave move container to $ws0
-bindsym $mod+Shift+1     move container to $ws1
-bindsym $mod+Shift+2     move container to $ws2
-bindsym $mod+Shift+3     move container to $ws3
-bindsym $mod+Shift+4     move container to $ws4
-bindsym $mod+Shift+5     move container to $ws5
-bindsym $mod+Shift+6     move container to $ws6
-bindsym $mod+Shift+7     move container to $ws7
-bindsym $mod+Shift+8     move container to $ws8
-bindsym $mod+Shift+9     move container to $ws9
-bindsym $mod+Shift+0     move container to $ws10
+bindsym $mod+shift+grave move container to $ws0 bindsym $mod+Shift+1 move container to $ws1 bindsym 
+$mod+Shift+2 move container to $ws2 bindsym $mod+Shift+3 move container to $ws3 bindsym $mod+Shift+4 
+move container to $ws4 bindsym $mod+Shift+5 move container to $ws5 bindsym $mod+Shift+6 move container 
+to $ws6 bindsym $mod+Shift+7 move container to $ws7 bindsym $mod+Shift+8 move container to $ws8 bindsym 
+$mod+Shift+9 move container to $ws9 bindsym $mod+Shift+0 move container to $ws10
 
 # Resize window (you can also use the mouse for that)
-bindsym $mod+y resize shrink width 10 px or 10 ppt
-bindsym $mod+u resize grow height 10 px or 10 ppt
-bindsym $mod+i resize shrink height 10 px or 10 ppt
-bindsym $mod+o resize grow width 10 px or 10 ppt
+bindsym $mod+y resize shrink width 10 px or 10 ppt bindsym $mod+u resize grow height 10 px or 10 ppt 
+bindsym $mod+i resize shrink height 10 px or 10 ppt bindsym $mod+o resize grow width 10 px or 10 ppt
 
 # Workspace back and forth (with/without active container)
-workspace_auto_back_and_forth no
-bindsym $mod+c workspace back_and_forth
-bindsym $mod+Shift+c move container to workspace back_and_forth; workspace back_and_forth
+workspace_auto_back_and_forth no bindsym $mod+c workspace back_and_forth bindsym $mod+Shift+c move 
+container to workspace back_and_forth; workspace back_and_forth
 
 #=======================================
-# i3bar
-#=======================================
+# i3bar =======================================
 bar {
         position top
         font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
         font pango:DejaVu Sans Mono 9
         status_command i3status
-        
-        colors {                  #foreground #  #background
+
+        colors { #foreground # #background
                 focused_workspace "#000000" "#8431d7" "#ffffff"
                 }
 }
 
 #=======================================
-# Hardware specifics
-#=======================================
-# Media keys
-#===============
-bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 
+# Hardware specifics ======================================= Media keys ===============
+bindsym XF86MonBrightnessUp exec xbacklight -inc 10 bindsym XF86MonBrightnessDown exec xbacklight -dec 
+10
 
-bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
-bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
-bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute bindsym XF86AudioLowerVolume exec 
+amixer -q set Master 5%- bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
 
-bindsym XF86AudioPlay exec ncmpcpp toggle
-bindsym XF86AudioStop exec ncmpcpp stop
-bindsym XF86AudioPrev exec ncmpcpp prev
-bindsym XF86AudioNext exec ncmpcpp next
+bindsym XF86AudioPlay exec ncmpcpp toggle bindsym XF86AudioStop exec ncmpcpp stop bindsym XF86AudioPrev 
+exec ncmpcpp prev bindsym XF86AudioNext exec ncmpcpp next

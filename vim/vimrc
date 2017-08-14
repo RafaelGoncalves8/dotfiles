@@ -47,7 +47,7 @@ set wildmenu       " better command-bar completion
 ""Warnings""
 """"""""""""
 set confirm        " confirm warning before closing
-set visualbell     " instead of sound bell
+" set visualbell     " instead of sound bell
 
 ""Searches""
 """"""""""""
@@ -114,7 +114,7 @@ nmap <C-h> <C-w>h
 nmap <leader>b :bn<cr>
 nmap <leader>B :bp<cr>
 " Close current buffer
-nmap <leader>d :bd
+nmap <leader>d :bd<cr>
 " Window creation
 nmap <leader>h  :leftabove vsp<CR><c-w>h
 nmap <leader>l :rightbelow vsp<CR><c-w>l
@@ -154,7 +154,7 @@ nnoremap <leader>W :w !sudo tee % > /dev/null<CR>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 nnoremap <leader>m :set invrelativenumber<cr>
-nnoremap <leader>h :nohl<CR>
+nnoremap <leader>H :nohl<CR>
 nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 

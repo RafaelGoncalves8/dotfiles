@@ -15,6 +15,7 @@ general {
 }
 
 order += "disk /"
+order += "disk /media/data"
 order += "wireless _first_"
 order += "volume master"
 order += "battery all"
@@ -62,8 +63,13 @@ load {
 }
 
 disk "/" {
+        format = "R: %avail"
+}
+
+disk "/media/data" {
         format = "D: %avail"
 }
+
 volume master {
         format = "V: %volume"
         format_muted = "V: muted (%volume)"
