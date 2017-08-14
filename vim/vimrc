@@ -163,6 +163,7 @@ nnoremap <leader>o o<ESC>
 nnoremap <leader>O O<ESC>
 
 " Other useful keybindings
+nnoremap S :%s//g<left><left>
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :w !sudo tee % > /dev/null<CR>
 nnoremap <leader>q :q<cr>
