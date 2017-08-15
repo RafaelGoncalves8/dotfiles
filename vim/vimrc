@@ -88,7 +88,8 @@ au BufLeave,FocusLost * silent! wa
 
 ""Other useful features""
 """""""""""""""""""""""""
-set listchars=nbsp:·,tab:▸\ ,trail:·  " Configure how invisibles appear.
+set showbreak=\\
+set listchars=nbsp:·,tab:▸\ ,trail:·,eol:¬ " Configure how invisibles appear.
 set list           " show blank chars
 set mouse=a        " mouse selects switches to visual mode
 let g:netrw_liststyle=3 " Tree style for explore mode :Explore
