@@ -120,10 +120,10 @@ nnoremap <leader>x i<++>
 """""""""""""""""""""
 " List buffers
 " nmap <leader>ls :ls<cr> "useless w/ airline plugin
-" New empty tab TODO: replace this with new buffer command
-nmap <leader>N :tabnew<cr>
-" New buffer w/ tree of directories TODO: replace this with new buffer command
-nmap <leader>ne :tabnew<cr>:Explore<cr>
+" New empty buffer
+nmap <leader>N :enew<cr>
+" New buffer w/ tree of directories
+nmap <leader>ne :enew<cr>:Explore<cr>
 " Next/Previous buffer
 nmap <leader>b :bn<cr>
 nmap <leader>B :bp<cr>
