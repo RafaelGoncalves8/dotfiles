@@ -91,7 +91,7 @@ au BufLeave,FocusLost * silent! wa
 set listchars=nbsp:·,tab:▸\ ,trail:·  " Configure how invisibles appear.
 set list           " show blank chars
 set mouse=a        " mouse selects switches to visual mode
-let g:netrw_liststyle=3 " better style for explore mode :Explore
+let g:netrw_liststyle=3 " Tree style for explore mode :Explore
 set exrc           " Enable per-directory .vimrc files.
 set secure         " Disable unsafe commands in per-directory .vimrc files.
 
@@ -120,9 +120,9 @@ nnoremap <leader>x i<++>
 """""""""""""""""""""
 " List buffers
 " nmap <leader>ls :ls<cr> "useless w/ airline plugin
-" New empty buffer
+" New empty tab TODO: replace this with new buffer command
 nmap <leader>N :tabnew<cr>
-" New buffer w/ tree of directories
+" New buffer w/ tree of directories TODO: replace this with new buffer command
 nmap <leader>ne :tabnew<cr>:Explore<cr>
 " Next/Previous buffer
 nmap <leader>b :bn<cr>
@@ -171,7 +171,8 @@ nnoremap <leader>Q :q!<cr>
 nnoremap <leader>m :set invrelativenumber<cr>
 nnoremap <leader>H :nohl<CR>
 nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
-map <F6> :setlocal spell! spelllang=en_us<CR>
+map <F7> :setlocal spell! spelllang=en_us<CR>
+map <F8> :setlocal spell! spelllang=pt_br<CR>
 
 
 
@@ -183,8 +184,10 @@ map <F6> :setlocal spell! spelllang=en_us<CR>
 """""""""""""""""""""""""""
 autocmd InsertEnter * :set norelativenumber
 autocmd InsertLeave * :set relativenumber
+
 au FocusLost * :set norelativenumber
 au FocusGained * :set relativenumber
+" TODO: Aparently not working
 
 
 
