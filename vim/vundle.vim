@@ -18,6 +18,7 @@ Plugin 'vim-airline/vim-airline-themes' "airline themes
 Plugin 'tpope/vim-fugitive'             "git indicator
 Plugin 'tpope/vim-vinegar'              "more functionalities :E mode
 Plugin 'Shougo/unite.vim'               "buffer manager
+Plugin 'gabrielelana/vim-markdown'      "plugin for taking notes using md
 
 call vundle#end()
 
@@ -159,3 +160,6 @@ let g:airline#extensions#tabline#buffer_idx_format = {
     \ '9': '9: '
     \}
 
+"" Vim Markdown ""
+""""""""""""""""""
+let g:markdown_enable_spell_checking = 0

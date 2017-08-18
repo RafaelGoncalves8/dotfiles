@@ -174,6 +174,8 @@ nnoremap <leader>H :nohl<CR>
 nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 map <F7> :setlocal spell! spelllang=en_us<CR>
 map <F8> :setlocal spell! spelllang=pt_br<CR>
+imap <F1>  :!pandoc -o %<.pdf %<CR>
+nmap <F1> :!pandoc -o %<.pdf %<CR>
 
 
 
@@ -192,6 +194,56 @@ au FocusGained * :set relativenumber
 
 
 
+""""""""""""""
+""More Modes""
+""""""""""""""
+"""Notes""
+""""""""""
+func! NotesMode()
+    setlocal formatoptions=1
+    setlocal noexpandtab
+    map j gj
+    map k gk
+    map <leader>br :set spelllang=pt_br
+    map <leader>en :set spelllang=en_us
+    set complete+=s
+    set formatprg=par
+    setlocal wrap
+    setlocal linebreak
+
+    map <leader>m bi_ea_
+    map <leader>s bi__ea__
+    imap <leader>img ![<++>](<++>)<++><ESC>18h
+    " Code arduino
+    map <leader>ca o```arduino<CR><++><CR>```<CR><++><ESC>kkk
+    " Code python
+    map <leader>cp o```python<CR><++><CR>```<CR><++><ESC>kkk
+    " Code bash
+    map <leader>cb o```bash<CR><++><CR>```<CR><++><ESC>kkk
+    " Code c
+    map <leader>cc o```c<CR><++><CR>```<CR><++><ESC>kkk
+endfu
+com! Notes call NotesMode()
+
+map <leader>img ![<++>](<++>)<++><ESC>18h
+" Code arduino
+map <leader>ca o```arduino<CR><++><CR>```<CR><++><ESC>kkk
+" Code python
+map <leader>cp o```python<CR><++><CR>```<CR><++><ESC>kkk
+" Code bash
+map <leader>cb o```bash<CR><++><CR>```<CR><++><ESC>kkk
+" Code c
+map <leader>cc o```c<CR><++><CR>```<CR><++><ESC>kkk
+
+imap ;c ç
+imap ;e ê
+imap ;a ã
+imap ;o õ
+imap [e é
+imap [a á
+imap ;i í
+
+
 """"""""""
 ""Layout""
 """"""""""
@@ -201,4 +253,5 @@ highlight LineNr ctermfg=244
 
 " Indication for 80 characters width
 let &colorcolumn="80,".join(range(81,999),",") "line warnings 80
+
 highlight ColorColumn ctermbg=none cterm=bold guibg=#2c2d27
