@@ -42,38 +42,35 @@ set showcmd        " show cmd while beeing typed
 set title          " show title on status line
 set laststatus=2   " 2 lines for the status line
 set cmdheight=2    " 2 lines for cmd prompt
+set wildmode=longest,list,full
 set wildmenu       " better command-bar completion
 
-""Behaviout""
-"""""""""""""
 set scrolloff=5    " lines under and above cursor to show when scrolling
-""Warnings""
-""""""""""""
-set confirm        " confirm warning before closing
-" set visualbell     " instead of sound bell
 
-""Searches""
-""""""""""""
+set confirm        " confirm warning before closing
+
 set hlsearch       " highlight searches
 set ignorecase     " ignore letter cases
 set smartcase      " case-sensitive when with capital letters
 
-""Backups""
-"""""""""""
 set backupdir=~/.vim/backup
 set directory=~/.vim/backup
 
-""Tabs and Backspaces""
-"""""""""""""""""""""""
 set backspace=indent,eol,start  " allow backspacing autoindent
 set shiftwidth=4   " identation = 4 spaces
 set tabstop=4      " tab navigates between 4 spaces gaps
 set expandtab
 set softtabstop=4
 
-""Buffers""
-"""""""""""
 set hidden         " hide vim buffers instead of closing them
+
+set showbreak=\\
+set listchars=nbsp:·,tab:▸\ ,trail:·,eol:¬ " Configure how invisibles appear.
+set list           " show blank chars
+set mouse=a        " mouse selects switches to visual mode
+let g:netrw_liststyle=3 " Tree style for explore mode :Explore
+set exrc           " Enable per-directory .vimrc files.
+set secure         " Disable unsafe commands in per-directory .vimrc files.
 
 " Reload file without prompting if it has changed on disk.
 " Will still prompt if there is unsaved text in the buffer.
@@ -86,15 +83,16 @@ set autowrite
 " When switching to another or leaving focus
 au BufLeave,FocusLost * silent! wa
 
-""Other useful features""
-"""""""""""""""""""""""""
-set showbreak=\\
-set listchars=nbsp:·,tab:▸\ ,trail:·,eol:¬ " Configure how invisibles appear.
-set list           " show blank chars
-set mouse=a        " mouse selects switches to visual mode
-let g:netrw_liststyle=3 " Tree style for explore mode :Explore
-set exrc           " Enable per-directory .vimrc files.
-set secure         " Disable unsafe commands in per-directory .vimrc files.
+""Relative number toggles""
+"""""""""""""""""""""""""""
+nnoremap <leader>m :set invrelativenumber<cr>
+
+autocmd InsertEnter * :set norelativenumber
+autocmd InsertLeave * :set relativenumber
+
+au FocusLost * :set norelativenumber
+au FocusGained * :set relativenumber
+" TODO: Aparently not working
 
 
 
@@ -102,23 +100,17 @@ set secure         " Disable unsafe commands in per-directory .vimrc files.
 ""Mappings""
 """"""""""""
 
-""Window navigation""
-"""""""""""""""""""""
 nmap <C-j> <C-w>j
 nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <C-h> <C-w>h
 
-""Navigation in buffer""
-""""""""""""""""""""""""
 " inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
-vnoremap <Space><Space> <Esc>/<++><Enter>"_c4l
-map <Space><Space> <Esc>/<++><Enter>"_c4l
+vnoremap ^<Space> <Esc>/<++><Enter>"_c4l
+map ^<Space> <Esc>/<++><Enter>"_c4l
 inoremap ;mrk <++>
-nnoremap <leader>x i<++>
+nnoremap <leader>x i<++><ESC>
 
-""Panes and Buffers""
-"""""""""""""""""""""
 " List buffers
 " nmap <leader>ls :ls<cr> "useless w/ airline plugin
 " New empty buffer
@@ -143,8 +135,6 @@ nmap <leader>nk :leftabove sp<CR><c-w>k :Explore<CR>
 " Load new in same window
 nmap <leader>nn :Explore<CR>
 
-""Copy-Paste""
-""""""""""""""
 " Easier copy/paste from system clipboard
 vmap <leader>y "+y
 vmap <leader>d "+d
@@ -153,8 +143,6 @@ nmap <leader>P "+P
 vmap <leader>p "+p
 vmap <leader>P "+P
 
-""Structure""
-"""""""""""""
 " Keep selection when indenting in v-mode
 vnoremap > >gv
 vnoremap < <gv
@@ -163,85 +151,89 @@ vnoremap < <gv
 nnoremap <leader>o o<ESC>
 nnoremap <leader>O O<ESC>
 
-" Other useful keybindings
+" Find/replace
 nnoremap S :%s//g<left><left>
+nnoremap <leader>H :nohl<CR>
+
 nnoremap <leader>w :w<cr>
 nnoremap <leader>W :w !sudo tee % > /dev/null<CR>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
-nnoremap <leader>m :set invrelativenumber<cr>
-nnoremap <leader>H :nohl<CR>
+
 nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
+
 map <F7> :setlocal spell! spelllang=en_us<CR>
 map <F8> :setlocal spell! spelllang=pt_br<CR>
-imap <F1>  :!pandoc -o %<.pdf %<CR>
-nmap <F1> :!pandoc -o %<.pdf %<CR>
 
+" F1 to compile any file
+noremap <F1> :make<CR>
+" F3 to convert to pdf
+noremap <F3> :!pandoc -o %<.pdf %<CR><CR>
+" F2 to run
+autocmd Filetype c  map <F2> :!./%<
+autocmd FileType py map <F2> :!python %
 
 
 """"""""""
 ""Others""
 """"""""""
+" Make "
+""""""""
+autocmd FileType c set makeprg=gcc\ -g\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm autocmd FileType arduino set makeprg=arduino\ --verify
 
-""Relative number toggles""
-"""""""""""""""""""""""""""
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
+" Latex "
+"""""""""
+"TODO
 
-au FocusLost * :set norelativenumber
-au FocusGained * :set relativenumber
-" TODO: Aparently not working
+" Markdown "
+""""""""""""
+let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter>
+autocmd Filetype markdown inoremap ;1 #
+autocmd Filetype markdown inoremap ;2 ##
+autocmd Filetype markdown inoremap ;3 ###
+autocmd Filetype markdown inoremap ;e **<Space><++><ESC>F*i
+autocmd Filetype markdown inoremap ;b ****<Space><++><ESC>F*hi
+autocmd Filetype markdown inoremap ;s ~~~~<Space><++><Esc>F~hi
+autocmd Filetype markdown inoremap ;t $$<Space><++><ESC>F$i
+autocmd Filetype markdown inoremap ;img ![](<++>) <++><ESC>F[a
+autocmd Filetype markdown inoremap ;ca o```arduino<CR><CR>```<CR><++><ESC>kk
+autocmd Filetype markdown inoremap ;cp o```python<CR><CR>```<CR><++><ESC>kk
+autocmd Filetype markdown inoremap ;cb o```bash<CR><CR>```<CR><++><ESC>kk
+autocmd Filetype markdown inoremap ;cc o```c<CR><CR>```<CR><++><ESC>kk
 
+" HTML "
+""""""""
+autocmd FileType html inoremap ;e <em></em><Space><++><ESC>F/hi
+autocmd FileType html inoremap ;b <strong></strong><Space><++><ESC>F/hi
+autocmd FileType html inoremap ;1 <h1></h1><Enter><Enter><++><ESC>F/hi
+autocmd FileType html inoremap ;2 <h2></h2><Enter><Enter><++><ESC>F/hi
+autocmd FileType html inoremap ;3 <h3></h3><Enter><Enter><++><ESC>F/hi
+autocmd FileType html inoremap ;p <p></p><Enter><Enter><++><ESC>F/hi
+autocmd FileType html inoremap ;a <a<Space>href=""><++></a><Enter><Enter><++><ESC>F/hi
+autocmd FileType html inoremap ;img <img src=""/><Space><++>F"i
+autocmd FileType html inoremap ;ul <ul><Enter><li></li><Enter></ul><Enter><Enter><++><Esc>03kf<i
+autocmd FileType html inoremap ;li <Esc>o<li></li><Esc>F>a
+autocmd FileType html inoremap ;ol <ol><Enter><li></li><Enter></ol><Enter><Enter><++><Esc>03kf<i
 
+" CSS "
+"""""""
+"TODO
 
-""""""""""""""
-""More Modes""
-""""""""""""""
-"""Notes""
+" Django "
 """"""""""
-func! NotesMode()
-    setlocal formatoptions=1
-    setlocal noexpandtab
-    map j gj
-    map k gk
-    map <leader>br :set spelllang=pt_br
-    map <leader>en :set spelllang=en_us
-    set complete+=s
-    set formatprg=par
-    setlocal wrap
-    setlocal linebreak
+"TODO
 
-    map <leader>m bi_ea_
-    map <leader>s bi__ea__
-    imap <leader>img ![<++>](<++>)<++><ESC>18h
-    " Code arduino
-    map <leader>ca o```arduino<CR><++><CR>```<CR><++><ESC>kkk
-    " Code python
-    map <leader>cp o```python<CR><++><CR>```<CR><++><ESC>kkk
-    " Code bash
-    map <leader>cb o```bash<CR><++><CR>```<CR><++><ESC>kkk
-    " Code c
-    map <leader>cc o```c<CR><++><CR>```<CR><++><ESC>kkk
-endfu
-com! Notes call NotesMode()
-
-map <leader>img ![<++>](<++>)<++><ESC>18h
-" Code arduino
-map <leader>ca o```arduino<CR><++><CR>```<CR><++><ESC>kkk
-" Code python
-map <leader>cp o```python<CR><++><CR>```<CR><++><ESC>kkk
-" Code bash
-map <leader>cb o```bash<CR><++><CR>```<CR><++><ESC>kkk
-" Code c
-map <leader>cc o```c<CR><++><CR>```<CR><++><ESC>kkk
-
+" International keys "
+""""""""""""""""""""""
 imap ;c ç
+imap [e é
 imap ;e ê
+imap [a á
+imap {a à
 imap ;a ã
 imap ;o õ
-imap [e é
-imap [a á
-imap ;i í
+imap [i í
 
 
 """"""""""
