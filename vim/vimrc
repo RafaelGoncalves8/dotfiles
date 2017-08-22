@@ -183,7 +183,20 @@ autocmd FileType c set makeprg=gcc\ -g\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm autocmd
 
 " Latex "
 """""""""
-"TODO
+autocmd FileType tex inoremap ;em \emph{}<++><Esc>T{i
+autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i
+autocmd FileType tex inoremap ;it \textit{}<++><Esc>T{i
+autocmd FileType tex inoremap ;ct \textcite{}<++><Esc>T{i
+autocmd FileType tex inoremap ;cp \parencite{}<++><Esc>T{i
+
+autocmd FileType tex inoremap ;ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ;ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
+autocmd FileType tex inoremap ;li <Enter>\item<Space>
+
+autocmd FileType tex inoremap ;chap \chapter{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ;sec \section{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ;ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
+autocmd FileType tex inoremap ;sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
 
 " Markdown "
 """"""""""""

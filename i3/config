@@ -192,8 +192,11 @@ for_window [window_role="task_dialog"] floating enable
 for_window [urgent=latest] focus
 for_window [instance="scratch"] move scratchpad
 
-for_window [window_role="gimp-dock"] floating disable; move left; resize shrink width 50 px or 50ppt
-for_window [window_role="gimp-toolbox"] floating disable; move right; resize grow width 30 px or 30ppt
+for_window [window_role="gimp-dock"] floating disable
+for_window [window_role="gimp-dock"]  move left
+for_window [window_role="gimp-toolbox"] floating disable
+for_window [window_role="gimp-toolbox"]  move right
+for_window [window_role="gimp-image-window"] resize width grow 80 px or 80ppt
 
 # Font
 #=================
@@ -205,9 +208,9 @@ font pango:DejaVu Sans Mono 10
 new_window pixel 1
 
 # Colors
-#=================      
+#=================
 #class                  border   background   text    indicator  child_border
-client.focused          $cyan     $cyan      $black   $green     $cyan 
+client.focused          $cyan     $cyan      $black   $green     $cyan
 client.focused_inactive $black    $black     $white   $green     $black
 client.unfocused        $black    $black     $white   $green     $black
 client.urgent           $red      $red       $white   $magenta   $red
@@ -327,7 +330,7 @@ bar {
 # Media keys
 #===============
 bindsym XF86MonBrightnessUp exec xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec xbacklight -dec 10 
+bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
