@@ -105,9 +105,9 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <C-h> <C-w>h
 
-" inoremap <Space><Space> <Esc>/<++><Enter>"_c4l
-vnoremap ^<Space> <Esc>/<++><Enter>"_c4l
-map ^<Space> <Esc>/<++><Enter>"_c4l
+nnoremap <C-@> <Esc>/<++><Enter>"_c4l
+vnoremap <C-@> <Esc>/<++><Enter>"_c4l
+inoremap <C-@> <Esc>/<++><Enter>"_c4l
 inoremap ;mrk <++>
 nnoremap <leader>x i<++><ESC>
 
@@ -167,8 +167,10 @@ map <F8> :setlocal spell! spelllang=pt_br<CR>
 
 " F1 to compile any file
 noremap <F1> :make<CR>
-" F3 to convert to pdf
+" F3 to convert markdown to pdf
 noremap <F3> :!pandoc -o %<.pdf %<CR><CR>
+" F5 to convert latex to pdf
+noremap <F4> :!pdflatex %<CR><CR>
 " F2 to run
 autocmd Filetype c  map <F2> :!./%<
 autocmd FileType py map <F2> :!python %
@@ -180,6 +182,15 @@ autocmd FileType py map <F2> :!python %
 " Make "
 """"""""
 autocmd FileType c set makeprg=gcc\ -g\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm autocmd FileType arduino set makeprg=arduino\ --verify
+
+" Templates "
+"""""""""""""
+autocmd FileType html inoremap ;tmp <ESC>:read ~/.vim/templates/template.html<CR>
+autocmd FileType arduino inoremap ;tmp <ESC>:read ~/.vim/templates/template.ino<CR>
+
+" Arduino "
+"""""""""""
+let g:vimwiki_ext2syntax = {'.ino': 'arduino'}
 
 " Latex "
 """""""""
@@ -222,7 +233,7 @@ autocmd FileType html inoremap ;b <strong></strong><Space><++><ESC>F/hi
 autocmd FileType html inoremap ;1 <h1></h1><Enter><Enter><++><ESC>F/hi
 autocmd FileType html inoremap ;2 <h2></h2><Enter><Enter><++><ESC>F/hi
 autocmd FileType html inoremap ;3 <h3></h3><Enter><Enter><++><ESC>F/hi
-autocmd FileType html inoremap ;p <p></p><Enter><Enter><++><ESC>F/hi
+autocmd FileType html inoremap ;p <p></p><Enter><Enter><++><ESC>kk
 autocmd FileType html inoremap ;a <a<Space>href=""><++></a><Enter><Enter><++><ESC>F/hi
 autocmd FileType html inoremap ;img <img src=""/><Space><++>F"i
 autocmd FileType html inoremap ;ul <ul><Enter><li></li><Enter></ul><Enter><Enter><++><Esc>03kf<i
@@ -258,5 +269,7 @@ highlight LineNr ctermfg=244
 
 " Indication for 80 characters width
 let &colorcolumn="80,".join(range(81,999),",") "line warnings 80
+autocmd Filetype python let &colorcolumn="72,".join(range(72,999),",") "line warnings 72
+
 
 highlight ColorColumn ctermbg=none cterm=bold guibg=#2c2d27

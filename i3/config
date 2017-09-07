@@ -79,6 +79,9 @@ bindsym $mod+Next  exec setxkbmap br
 # For mouse
 floating_modifier $mod
 
+# Focus not follow mouse
+focus_follows_mouse no
+
 # dmenu
 bindsym $mod+d exec --no-startup-id dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
