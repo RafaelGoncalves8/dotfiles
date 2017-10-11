@@ -111,7 +111,8 @@ inoremap <C-@> <Esc>/<++><Enter>"_c4l
 inoremap ;mrk <++>
 nnoremap <leader>x i<++><ESC>
 
-" List buffers
+" List buffers_check(identifier, test_ratio, hash):
+"    return hash(np.int64(identifier)).digest()[-1] < 256 * test_ratio
 " nmap <leader>ls :ls<cr> "useless w/ airline plugin
 " New empty buffer
 nmap <leader>N :enew<cr>
@@ -250,14 +251,14 @@ autocmd FileType html inoremap ;ol <ol><Enter><li></li><Enter></ol><Enter><Enter
 
 " International keys "
 """"""""""""""""""""""
-imap ;c ç
-imap [e é
-imap ;e ê
-imap [a á
-imap {a à
-imap ;a ã
-imap ;o õ
-imap [i í
+" imap ;c ç
+" imap [e é
+" imap ;e ê
+" imap [a á
+" imap {a à
+" imap ;a ã
+" imap ;o õ
+" imap [i í
 
 
 """"""""""

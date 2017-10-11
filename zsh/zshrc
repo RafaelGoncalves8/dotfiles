@@ -21,7 +21,7 @@ export BIN=$HOME/bin
 export TMP=$HOME/tmp
 export DOTFILES=$HOME/dotfiles
 
-export PATH=$PATH::$SCRIPTS:$BIN
+export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS
 
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR

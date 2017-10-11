@@ -26,6 +26,7 @@ order += "tztime local"
 
 cpu_temperature 0 {
         format = "%degrees°C"
+        max_threshold = "60"
         format_above_threshold = "%degrees!°C"
 }
 
