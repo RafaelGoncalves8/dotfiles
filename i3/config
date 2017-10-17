@@ -15,8 +15,8 @@
 # Variables
 #=================
 # alt; super
-set $mod  Mod1
-set $mod2 Mod4
+set $mod  Mod4
+set $mod2 Mod1
 
 # Workspace name tags
 set $ws0  workspace 0:admn
