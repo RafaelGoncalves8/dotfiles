@@ -87,8 +87,8 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # screenshots on media/img/screenshots
-bindsym --release Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/img/screenshots/'
-bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/img/screenshots/'
+bindsym --release Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/screenshots/'
+bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/screenshots/'
 
 #i3lock
 bindsym Ctrl+$mod+space exec i3lock -d -i $lock -u -c 333333 -e -f
