@@ -74,6 +74,11 @@ insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
+#history search
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^N" history-search-forward
+
 #common comands
 alias -g ls="ls --color"
 alias -g la="ls -lah --color"
