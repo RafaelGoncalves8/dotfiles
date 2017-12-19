@@ -27,7 +27,7 @@ export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-export TERM=xterm-256color
+export TERM=urxvt
 
 source $DOTFILES/zsh/gitstatus.sh
 source $HOME/.greengrocer.sh
@@ -129,10 +129,10 @@ add-zsh-hook chpwd chpwd_recent_dirs
 #LPrompt
 ##White Prompt
 #PROMPT='[%n@%m %{$fg_bold[white]%}%1~%{$reset_color%}]%(!.#.$) '
-##Cyan Prompt
-#PROMPT='%{$fg[cyan]%}[%n@%m %{$fg_bold[cyan]%}%1~%{$reset_color%}%{$fg[cyan]%}]%(!.#.$) %{$reset_color%}'
+#Cyan Prompt
+PROMPT='%{$fg[cyan]%}[%n@%m %{$fg_bold[cyan]%}%1~%{$reset_color%}%{$fg[cyan]%}]%(!.#.$) %{$reset_color%}'
 ##Pink Prompt
-PROMPT='%{$fg[red]%}[%n@%m %{$fg_bold[red]%}%1~%{$reset_color%}%{$fg[red]%}]%(!.#.$) %{$reset_color%}'
+#PROMPT='%{$fg[red]%}[%n@%m %{$fg_bold[red]%}%1~%{$reset_color%}%{$fg[red]%}]%(!.#.$) %{$reset_color%}'
 
 #RPrompt
 RPROMPT='$(git_super_status) %(1j.[%j].)'
