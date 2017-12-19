@@ -24,7 +24,7 @@ let mapleader = "\<Space>"
 ""Plugins""
 """""""""""
 filetype off       " turn off and on for proper plugin init
-source ~/dotfiles/vim/vundle.vim " vundle manager
+" source ~/dotfiles/vim/vundle.vim " vundle manager
 filetype plugin indent on
 
 

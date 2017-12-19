@@ -56,15 +56,15 @@ exec --no-startup-id feh --bg-fill $bg
 # redshift
 exec --no-startup-id redshift
 # cmus on scratch-1
-exec --no-startup-id termite --name="scratch-mus" -e cmus
+exec --no-startup-id urxvt --name="scratch-mus" -e cmus
 # octave on scratch-2
-exec --no-startup-id termite --name="scratch-oct" -e octave-cli
+exec --no-startup-id urxvt --name="scratch-oct" -e octave-cli
 # pulseaudio
 # exec --no-startup-id "devmon --no-gui"
 # exec --no-startup-id "pulseaudio --start"
 # sync and launch calcurse
 exec --no-startup-id "~/scripts/sync-cal.sh"
-exec --no-startup-id termite --name="scratch-cal" -e calcurse
+exec --no-startup-id urxvt --name="scratch-cal" -e calcurse
 # default keyboard us international
 exec --no-startup-id setxkbmap -layout us -variant altgr-intl
 # hide mouse after brief period
@@ -99,20 +99,20 @@ bindsym $mod+minus scratchpad show
 
 # Applications launching
 #=================
-bindsym $mod+Return exec termite
-bindsym $mod+Shift+Return exec termite --name="float"
+bindsym $mod+Return exec urxvt
+bindsym $mod+Shift+Return exec urxvt --name="float"
 
 bindsym $mod+w exec i3-msg exec firefox; mark ws2; $ws2
 bindsym $mod+Shift+w exec qutebrowser; mark ws2; $ws2
 
 bindsym $mod+Shift+f exec i3-msg exec pcmanfm; mark ws3; $ws3
 bindsym $mod+Shift+Ctrl+f  exec i3-msg exec gksu pcmanfm; mark ws3; $ws3
-bindsym $mod+f exec "termite -e ranger"
-bindsym $mod+Ctrl+f exec "termite -e sudo ranger"
-bindsym $mod+Shift+d exec termite -e ranger --name="float"
+bindsym $mod+f exec "urxvt -e ranger"
+bindsym $mod+Ctrl+f exec "urxvt -e sudo ranger"
+bindsym $mod+Shift+d exec urxvt -e ranger --name="float"
 
-bindsym $mod+e exec "termite -e vim"
-bindsym $mod+Ctrl+e  "exec termite -e sudo vim"
+bindsym $mod+e exec "urxvt -e vim"
+bindsym $mod+Ctrl+e  "exec urxvt -e sudo vim"
 
 bindsym $mod+Shift+m exec i3-msg exec thunderbird; mark ws5; $ws5
 
@@ -124,21 +124,21 @@ bindsym $mod+n exec i3-msg exec nicotine; mark ws10; $ws10
 # F3    Calend  calcurse
 # F4    IRC     weechat
 # F5    Torrent transmission
-# F6-F12 term   termite    
+# F6-F12 term   urxvt    
 
-bindsym Shift+F1 exec termite --name="scratch-mus"  -e cmus
-bindsym Shift+F2 exec termite --name="scratch-oct"  -e octave-cli
-bindsym Shift+F3 exec termite --name="scratch-cal"  -e calcurse
-bindsym Shift+F4 exec termite --name="scratch-irc"  -e weechat
-bindsym Shift+F5 exec termite --name="scratch-tor"  -e transmission
+bindsym Shift+F1 exec urxvt --name="scratch-mus"  -e cmus
+bindsym Shift+F2 exec urxvt --name="scratch-oct"  -e octave-cli
+bindsym Shift+F3 exec urxvt --name="scratch-cal"  -e calcurse
+bindsym Shift+F4 exec urxvt --name="scratch-irc"  -e weechat
+bindsym Shift+F5 exec urxvt --name="scratch-tor"  -e transmission
 
-bindsym Shift+F6  exec termite --name="scratch-term-6"
-bindsym Shift+F7  exec termite --name="scratch-term-7"
-bindsym Shift+F8  exec termite --name="scratch-term-8"
-bindsym Shift+F9  exec termite --name="scratch-term-9"
-bindsym Shift+F10 exec termite --name="scratch-term-10"
-bindsym Shift+F11 exec termite --name="scratch-term-11"
-bindsym Shift+F12 exec termite --name="scratch-term-12"
+bindsym Shift+F6  exec urxvt --name="scratch-term-6"
+bindsym Shift+F7  exec urxvt --name="scratch-term-7"
+bindsym Shift+F8  exec urxvt --name="scratch-term-8"
+bindsym Shift+F9  exec urxvt --name="scratch-term-9"
+bindsym Shift+F10 exec urxvt --name="scratch-term-10"
+bindsym Shift+F11 exec urxvt --name="scratch-term-11"
+bindsym Shift+F12 exec urxvt --name="scratch-term-12"
 
 bindsym $mod+F1  exec "i3-msg '[instance=scratch-mus] scratchpad show'"
 bindsym $mod+F2  exec "i3-msg '[instance=scratch-oct] scratchpad show'"

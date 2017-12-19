@@ -18,21 +18,18 @@ export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-export TERM=xterm-256color
+export TERM=rxvt
 
-source $DOTFILES/zsh/gitstatus.sh
-
-bind -v
 #common comands
-alias -g ls="ls --color"
-alias -g la="ls -lah --color"
-alias -g grep="grep --color"
-alias -g ns="sudo netctl stop-all && sudo netctl start"
+alias ls="ls --color"
+alias la="ls -lah --color"
+alias grep="grep --color"
+alias ns="sudo netctl stop-all && sudo netctl start"
 
 #cd
-alias -g ...="../.."
-alias -g ....="../../.."
-alias -g .....="../../../.."
+alias ...="../.."
+alias ....="../../.."
+alias .....="../../../.."
 
 #common places
 alias inbox="cd $INBOX"
@@ -54,10 +51,5 @@ alias termiteconf="$EDITOR $HOME/.config/termite/config"
 alias i3conf="$EDITOR $HOME/.config/i3/config"
 alias rangerc="$EDITOR $HOME/.config/ranger/rc.conf"
 
-PS1='$(git_super_status)[\n@\m \W]\$'
-
-export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
-export HISTCONTROL=ignoreboth
-shopt -s histappend
-
+PS1='[\u@\h \W]\$'
 
