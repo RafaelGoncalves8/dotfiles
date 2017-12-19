@@ -1,0 +1,63 @@
+
+## Variables ##
+###############
+export INBOX=$HOME/inbox
+export ARCHIVE=$HOME/archive
+export MEDIA=$HOME/media
+export IMAGES=$HOME/media/img
+export MUSIC=$HOME/media/mus
+export BUILDS=$HOME/builds
+export SCRIPTS=$HOME/scripts
+export BIN=$HOME/bin
+export TMP=$HOME/tmp
+export DOTFILES=$HOME/dotfiles
+
+export PATH=$PATH:BUILDS:SCRIPTS:BIN
+
+export EDITOR="vim"
+export USE_EDITOR=$EDITOR
+export VISUAL=$EDITOR
+
+export TERM=xterm-256color
+
+source $DOTFILES/zsh/gitstatus.sh
+
+bind -v
+#common comands
+alias -g ls="ls --color"
+alias -g la="ls -lah --color"
+alias -g grep="grep --color"
+alias -g ns="sudo netctl stop-all && sudo netctl start"
+
+#cd
+alias -g ...="../.."
+alias -g ....="../../.."
+alias -g .....="../../../.."
+
+#common places
+alias inbox="cd $INBOX"
+alias archive="cd $ARCHIVE"
+alias media="cd $MEDIA"
+alias dotfiles="cd $DOTFILES"
+alias img="cd $IMAGES"
+alias mus="cd $MUSIC"
+alias builds="cd $BUILDS"
+alias scripts="cd $SCRIPTS"
+alias bin="cd $BIN"
+alias tmp="cd $TMP"
+
+#editing conf files
+alias zshrc="$EDITOR $DOTFILES/zsh/zshrc"
+alias vimrc="$EDITOR $DOTFILES/vim/vimrc"
+alias tmuxconf="$EDITOR $DOTFILES/tmux/conf"
+alias termiteconf="$EDITOR $HOME/.config/termite/config"
+alias i3conf="$EDITOR $HOME/.config/i3/config"
+alias rangerc="$EDITOR $HOME/.config/ranger/rc.conf"
+
+PS1='$(git_super_status)[\n@\m \W]\$'
+
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=ignoreboth
+shopt -s histappend
+
+
