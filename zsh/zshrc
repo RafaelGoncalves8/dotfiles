@@ -21,7 +21,7 @@ export BIN=$HOME/bin
 export TMP=$HOME/tmp
 export DOTFILES=$HOME/dotfiles
 
-export PATH=$PATH:BUILDS:SCRIPTS:BIN
+export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS
 
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
@@ -74,6 +74,11 @@ insert_sudo () { zle beginning-of-line; zle -U "sudo " }
 zle -N insert-sudo insert_sudo
 bindkey "^[s" insert-sudo
 
+#history search
+bindkey "^R" history-incremental-search-backward
+bindkey "^P" history-search-backward
+bindkey "^N" history-search-forward
+
 #common comands
 alias -g ls="ls --color"
 alias -g la="ls -lah --color"
@@ -82,25 +87,23 @@ alias -g ns="sudo netctl stop-all && sudo netctl start"
 
 #cd
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
-setopt auto_pushd
-alias -g 'cd ..'='cd ".."'
-alias -g cd ...='cd "../.."'
-alias -g cd ....='cd "../../.."'
-alias -g ..='cd ".."'
-alias -g ...='cd "../.."'
-alias -g ....='cd "../../.."'
+setopt auto_cd
+
+alias -g ...="../.."
+alias -g ....="../../.."
+alias -g .....="../../../.."
 
 #common places
-alias inbox="pushd $INBOX"
-alias archive="pushd $ARCHIVE"
-alias media="pushd $MEDIA"
-alias dotfiles="pushd $DOTFILES"
-alias img="pushd $IMAGES"
-alias mus="pushd $MUSIC"
-alias builds="pushd $BUILDS"
-alias scripts="pushd $SCRIPTS"
-alias bin="pushd $BIN"
-alias tmp="pushd $TMP"
+alias inbox="cd $INBOX"
+alias archive="cd $ARCHIVE"
+alias media="cd $MEDIA"
+alias dotfiles="cd $DOTFILES"
+alias img="cd $IMAGES"
+alias mus="cd $MUSIC"
+alias builds="cd $BUILDS"
+alias scripts="cd $SCRIPTS"
+alias bin="cd $BIN"
+alias tmp="cd $TMP"
 
 #editing conf files
 alias zshrc="$EDITOR $DOTFILES/zsh/zshrc"
