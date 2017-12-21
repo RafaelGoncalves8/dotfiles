@@ -1,0 +1,89 @@
+!##########
+!# colors #
+!##########
+
+*foreground:      #EEEEEE
+*foreground_bold: #EEEEEE
+*cursor:          #66ff66
+*background:      #101010
+
+! Black (normal/bold)
+*color0 :  #101010
+*color8 :  #101010
+
+! Red (normal/bold)
+*color1 :  #f92672
+*color9 :  #f92672
+
+! Green (normal/bold)
+*color2  : #a6e22e
+*color10 : #a6e22e
+
+! Yellow (normal/bold)
+*color3  : #fd971f
+*color11 : #fd971f
+
+! Blue (normal/bold)
+*color4  : #0080ff
+*color12 : #0080ff
+
+! Magenta (normal/bold)
+*color5  : #9B48EF
+*color13 : #9B48EF
+
+! Cyan (normal/bold)
+*color6  : #66d9ef
+*color14 : #66d9ef
+
+! White (normal/bold)
+*color7  : #d0d0d0
+*color15 : #d0d0d0
+
+!#########
+!# Xterm #
+!#########
+
+Xterm.utf8: 1
+
+
+!#########
+!# URxvt #
+!#########
+!
+URxvt.depth:        32
+URxvt.background:   [75]#000000
+URxvt.transparence: false
+
+URxvt.font:         xft:monospace:size=11
+
+URxvt.scrollBar:    false
+URxvt.cursorColor:  #66ff66
+URxvt.colorUL:      #9B48EF
+
+! Extensions
+! matcher - enable clicking in links
+! resize-font - enable resizing fonts on-the-go
+! url-select  - vim-like navigation trhough links
+! keyboard-select - vim-like navigation trhough terminal
+URxvt.perl-ext-common: default,matcher,resize-font,url-select,keyboard-select
+URxvt.perl-lib:        $HOME/.config/Scripts
+
+! matcher
+URxvt.url-launcher:    /usr/bin/xdg-open
+URxvt.matcher.button:  1
+
+! resize-font
+URxvt.resize-font.smaller:  C-Down
+URxvt.resize-font.bigger:   C-Up
+
+! url-select
+URxvt.keysym.M-u:           perl:url-select:select_next
+URxvt.url-select.launcher:  /usr/bin/xdg-open
+URxvt.url-select.underline: true
+
+! keyboard-select
+URxvt.keysym.M-Escape:  perls:keyboard-select:activate
+
+
+
+
