@@ -2,7 +2,7 @@
 font = Monospace 11
 
 [colors]
-background = rgba(00, 00, 00, 0.7)
+background = rgba(00, 00, 00, 0.8)
 cursor = #66ff66
 
 ##Normal colors##
