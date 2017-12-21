@@ -6,4 +6,4 @@
 ![Lenovo](screenshots/lenovo.png)  
 
 ### Asus s46c (Slackware)
-![Asus](rcreenshots/asus.png)  
+![Asus](screenshots/asus.png)  
