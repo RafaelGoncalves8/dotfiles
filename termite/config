@@ -2,28 +2,38 @@
 font = Monospace 11
 
 [colors]
-background = rgba(00, 00, 00, 0.8)
+background = rgba(00, 00, 00, 0.75)
 cursor = #66ff66
 
-##Normal colors##
-#black red green yellow blue magenta cyan white
+# Black (normal/bold)
 color0 = #101010
-color1 = #f92672
-color2 = #a6e22e
-color3 = #fd971f
-color4 = #0080ff
-color5 = #9B48EF
-color6 = #66d9ef
-color7 = #d0d0d0
-
-##Bold colors##
-#black red green yellow blue magenta cyan white
 color8 =  #101010
+
+# Red (normal/bold)
+color1 = #f92672
 color9 =  #f92672
+
+# Green (normal/bold)
+color2 = #a6e22e
 color10 = #a6e22e
+
+# Yellow (normal/bold)
+color3 = #fd971f
 color11 = #fd971f
+
+# Blue (normal/bold)
+color4 = #0080ff
 color12 = #0080ff
+
+# Magenta (normal/bold)
+color5 = #9B48EF
 color13 = #9B48EF
+
+# Cyan (normal/bold)
+color6 = #66d9ef
 color14 = #66d9ef
+
+# White (normal/bold)
+color7 = #d0d0d0
 color15 = #d0d0d0
 
