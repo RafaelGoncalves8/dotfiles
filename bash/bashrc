@@ -18,7 +18,7 @@ export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-export TERM=rxvt
+export TERM=rxvt-unicode
 
 #common comands
 alias ls="ls --color"
@@ -51,5 +51,5 @@ alias termiteconf="$EDITOR $HOME/.config/termite/config"
 alias i3conf="$EDITOR $HOME/.config/i3/config"
 alias rangerc="$EDITOR $HOME/.config/ranger/rc.conf"
 
-PS1='[\u@\h \W]\$'
+PS1='[\u@\h \W]\$ '
 

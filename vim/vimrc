@@ -19,6 +19,7 @@ set encoding=utf-8 " in case $LANG is not properly definded
 ""Leader""
 """"""""""
 nnoremap <SPACE> <Nop>
+inoremap ;; ;
 let mapleader = "\<Space>"
 
 ""Plugins""
@@ -88,9 +89,9 @@ au BufLeave,FocusLost * silent! wa
 
 ""Other useful features""
 """""""""""""""""""""""""
-set showbreak=\\
-set listchars=nbsp:·,tab:▸\ ,trail:·,eol:¬ " Configure how invisibles appear.
-set list           " show blank chars
+"set showbreak=\\
+"set listchars=nbsp:·,tab:▸\ ,trail:·,eol:¬ " Configure how invisibles appear.
+"set list           " show blank chars
 set mouse=a        " mouse selects switches to visual mode
 let g:netrw_liststyle=3 " Tree style for explore mode :Explore
 set exrc           " Enable per-directory .vimrc files.

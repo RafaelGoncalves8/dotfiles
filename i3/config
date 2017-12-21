@@ -32,7 +32,7 @@ set $ws9  workspace 9:
 set $ws10 workspace 10:N+ 
 
 # bg and lock img
-set $bg ~/media/.bg
+set $bg ~/media/bg
 set $lock ~/media/.lock.png
 
 #colors
@@ -47,6 +47,8 @@ set $white   "#d0d0d0"
 
 # Execs at startup
 #=================
+# polybar
+exec $HOME/.config/polybar/launch.sh
 # default workspace
 exec --no-startup-id i3-msg $ws1
 # windom composition manager
@@ -83,8 +85,8 @@ floating_modifier $mod
 focus_follows_mouse no
 
 # dmenu
-bindsym $mod+d exec --no-startup-id dmenu_run
-# bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+#bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # screenshots on media/img/screenshots
 bindsym --release Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/img/screenshots/'
@@ -315,16 +317,16 @@ bindsym $mod+Shift+c move container to workspace back_and_forth; workspace back_
 #=======================================
 # i3bar
 #=======================================
-bar {
-        position top
-        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        font pango:DejaVu Sans Mono 9
-        status_command i3status
-
-        colors {                  #foreground #  #background
-                focused_workspace "#000000" "#8431d7" "#ffffff"
-                }
-}
+#bar {
+#        position top
+#        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#        font pango:DejaVu Sans Mono 9
+#        status_command i3status
+#
+#        colors {                  #foreground #  #background
+#                focused_workspace "#000000" "#8431d7" "#ffffff"
+#                }
+#}
 
 #=======================================
 # Hardware specifics
@@ -343,3 +345,7 @@ bindsym XF86AudioStop exec cmus stop
 bindsym XF86AudioPrev exec cmus prev
 bindsym XF86AudioNext exec cmus next
 
+#GAPS
+gaps inner 10
+gaps outer 0 
+# smart gaps on
