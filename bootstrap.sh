@@ -9,7 +9,7 @@ echo
 dir=~/dotfiles              # dotfiles directory
 olddir=~/.dotfiles_old      # old dotfiles backup directory
 conf=~/.config              # config files in OS
-timestamp=$(%d-%m-%Y_%H-%M) # timestamp for the backup
+timestamp=$(date +%d-%m-%Y_%H-%M) # timestamp for the backup
 ##########
 
 #Choose which dotfiles you do want to use
@@ -35,7 +35,7 @@ files=(
 "urxvt/Xresources"
 "termite/config"
 "vim/vimrc"
-"vim/vim/"
+"vim/vim_folder"
 "tmux/conf"
 "git/config"
 "ranger/rc.conf"
@@ -97,8 +97,8 @@ for i in ${index[@]}; do
 done
 
 # save backup with timestamp
-echo "tar'ing up files"
-tar -czf $olddir/$timestamp.tar.gz $olddir/tmp
+echo "tar'ing up files of $olddir/tmp into $olddir/$timestamp.tar.gz"
+tar czf $olddir/$timestamp.tar.gz $olddir/tmp
 rm -rf $olddir/tmp
 echo "...done"
 
