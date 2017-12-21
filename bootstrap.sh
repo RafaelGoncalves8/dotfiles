@@ -1,4 +1,4 @@
-#! /bin/zsh
+#! /bin/sh
 
 echo "################"
 echo "# bootstrap.sh #"
@@ -14,19 +14,19 @@ timestamp=$(%d-%m-%Y_%H-%M) # timestamp for the backup
 
 #Choose which dotfiles you do want to use
 index=(
-1    bash
-2    zsh
-3    urxvt
-4    termite
-5    vim
-6    vim
-7    tmux
-8    git
-9    ranger
-10   ranger
-11   ranger
-12   i3
-13   i3status
+0   #  bash
+1   #  zsh
+2   #  urxvt
+3   #  termite
+4   #  vim
+5   #  vim
+6   #  tmux
+7   #  git
+8   #  ranger
+9   #  ranger
+10  #  ranger
+11  #  i3
+12  #  i3status
 )
 
 files=(
@@ -75,6 +75,7 @@ mkdir -p $olddir/tmp/git
 mkdir -p $olddir/tmp/ranger
 mkdir -p $olddir/tmp/i3
 mkdir -p $olddir/tmp/i3status
+mkdir -p $olddir/tmp/urxvt
 echo "...done"
 echo
 
@@ -89,8 +90,8 @@ echo "Moving existing dotfiles to $olddir:"
 echo
 for i in ${index[@]}; do
 
-    echo "moving ${target[i]} to $olddir/${files[i]}..."
-    mv ${target[i]} "$olddir/tmp/${files[i]}"
+    echo "moving ${target[$i]} to $olddir/tmp/${files[$i]}..."
+    mv ${target[$i]} $olddir/tmp/${files[$i]}
     echo "...done"
 
 done
@@ -106,8 +107,8 @@ rm -rf $HOME/vim # dont let recursive symlinks be done in vim folder
 echo "Making links:"
 echo
 for i in ${index[@]}; do
-    echo "linking $dir/${files[i]} to ${target[i]}"
-    ln -s "$dir/${files[i]}" ${target[i]}
+    echo "linking $dir/${files[$i]} to ${target[$i]}"
+    ln -s "$dir/${files[$i]}" ${target[$i]}
     echo "...done"
 done
 echo
