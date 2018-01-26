@@ -132,7 +132,9 @@ add-zsh-hook chpwd chpwd_recent_dirs
 ##Cyan Prompt
 #PROMPT='%{$fg[cyan]%}[%n@%m %{$fg_bold[cyan]%}%1~%{$reset_color%}%{$fg[cyan]%}]%(!.#.$) %{$reset_color%}'
 ##Pink Prompt
-PROMPT='%{$fg[red]%}[%n@%m %{$fg_bold[red]%}%1~%{$reset_color%}%{$fg[red]%}]%(!.#.$) %{$reset_color%}'
+#PROMPT='%{$fg[red]%}[%n@%m %{$fg_bold[red]%}%1~%{$reset_color%}%{$fg[red]%}]%(!.#.$) %{$reset_color%}'
+##New prompt
+PROMPT='%{$fg_bold[white]%}[%{$reset_color%}%{$fg[magenta]%}%m %{$fg_bold[magenta]%}%1~%{$reset_color%}%{$fg_bold[white]%}]%{$reset_color%}%(!.#.$) '
 
 #RPrompt
 RPROMPT='$(git_super_status) %(1j.[%j].)'
