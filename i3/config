@@ -58,7 +58,7 @@ exec --no-startup-id redshift
 # cmus on scratch-1
 exec --no-startup-id termite --name="scratch-mus" -e cmus
 # octave on scratch-2
-exec --no-startup-id termite --name="scratch-oct" -e octave-cli
+exec --no-startup-id termite --name="scratch-oct" -e octave-cli -q --traditional
 # pulseaudio
 # exec --no-startup-id "devmon --no-gui"
 # exec --no-startup-id "pulseaudio --start"
@@ -127,7 +127,7 @@ bindsym $mod+n exec i3-msg exec nicotine; mark ws10; $ws10
 # F6-F12 term   termite    
 
 bindsym Shift+F1 exec termite --name="scratch-mus"  -e cmus
-bindsym Shift+F2 exec termite --name="scratch-oct"  -e octave-cli
+bindsym Shift+F2 exec termite --name="scratch-oct" -e "octave-cli -q --traditional"
 bindsym Shift+F3 exec termite --name="scratch-cal"  -e calcurse
 bindsym Shift+F4 exec termite --name="scratch-irc"  -e weechat
 bindsym Shift+F5 exec termite --name="scratch-tor"  -e transmission
@@ -193,6 +193,9 @@ for_window [window_role="task_dialog"] floating enable
 
 for_window [urgent=latest] focus
 for_window [instance="scratch"] move scratchpad
+
+for_window [instance="scratch"] border pixel 2
+for_window [instance="scratch-oct"] resize set 650 300
 
 for_window [window_role="gimp-dock"] floating disable
 for_window [window_role="gimp-dock"]  move left
