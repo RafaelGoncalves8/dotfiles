@@ -48,7 +48,7 @@ set $white   "#d0d0d0"
 # Execs at startup
 #=================
 # urxvt
-exec --no-startup-id i3-msg xrdb -merge ~/.Xresources
+exec --no-startup-id "xrdb ~/.Xresources"
 # default workspace
 exec --no-startup-id i3-msg $ws1
 # windom composition manager
