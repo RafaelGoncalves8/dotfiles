@@ -122,18 +122,11 @@ bindsym $mod+Shift+m exec i3-msg exec thunderbird; mark ws5; $ws5
 bindsym $mod+n exec i3-msg exec nicotine; mark ws10; $ws10
 
 ## Scratchpad specifics
-# F1    Music   cmus
-# F2    Calcul  octave
-# F3    Calend  calcurse
-# F4    IRC     weechat
-# F5    Torrent transmission
-# F6-F12 term   urxvt    
-
 bindsym Shift+F1 exec urxvt -name "scratch-mus"  -e cmus
 bindsym Shift+F2 exec urxvt -name "scratch-oct"  -e octave-cli --quiet --traditional
 bindsym Shift+F3 exec urxvt -name "scratch-cal"  -e calcurse
 bindsym Shift+F4 exec urxvt -name "scratch-tmux" -e tmux
-bindsym Shift+F5 exec urxvt -name "scratch-tor"  -e weechat
+bindsym Shift+F5 exec urxvt -name "scratch-irc"  -e weechat
 
 bindsym Shift+F6  exec urxvt -name "scratch-term-6"
 bindsym Shift+F7  exec urxvt -name "scratch-term-7"
@@ -199,6 +192,12 @@ for_window [instance="scratch"] move scratchpad
 for_window [instance="scratch"] border pixel 2
 
 for_window [instance="scratch-oct"] resize set 650 300
+# for_window [instance="scratch-oct"] move position center
+#
+for_window [instance="scratch-irc"] resize set 1100 600
+# for_window [instance="scratch-irc"] move position center
+
+for_window [instance="scratch"] scratchpad show; move position center; move scratchpad # dirty fix
 
 for_window [window_role="gimp-dock"] floating disable
 for_window [window_role="gimp-dock"]  move left
