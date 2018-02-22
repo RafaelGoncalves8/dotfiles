@@ -29,7 +29,7 @@ set $ws6  workspace  6:graf
 set $ws7  workspace  7:rand
 set $ws8  workspace  8:rand
 set $ws9  workspace  9:rand
-set $ws10 workspace 10:N+  
+set $ws10 workspace 10:down
 
 # bg and lock img
 set $bg ~/media/.bg
@@ -47,30 +47,31 @@ set $white   "#d0d0d0"
 
 # Execs at startup
 #=================
-# urxvt
-exec --no-startup-id "xrdb ~/.Xresources"
 # default workspace
 exec --no-startup-id i3-msg $ws1
 # windom composition manager
 exec_always --no-startup-id xcompmgr -c -f -n -D 3
 # bg
 exec --no-startup-id feh --bg-fill $bg
+# default keyboard us international
+exec --no-startup-id setxkbmap -layout us -variant altgr-intl
+# hide mouse after brief period
+exec --no-startup-id unclutter
 # redshift
 exec --no-startup-id redshift
 # cmus on scratch-1
 exec --no-startup-id urxvt -name "scratch-mus" -e cmus
 # octave on scratch-2
 exec --no-startup-id urxvt -name "scratch-oct" -e octave-cli -q --traditional
-# pulseaudio
+# sync and launch calcurse on scratch-3
+exec --no-startup-id "~/scripts/sync-cal.sh"
+exec --no-startup-id "~/scripts/sync-notes.sh"
+exec --no-startup-id urxvt -name "scratch-cal" -e calcurse
+# tmux on scratch-4
+exec --no-startup-id urxvt -name "scratch-tmux" -e tmux
+## pulseaudio
 # exec --no-startup-id "devmon --no-gui"
 # exec --no-startup-id "pulseaudio --start"
-# sync and launch calcurse
-exec --no-startup-id "~/scripts/sync-cal.sh"
-exec --no-startup-id urxvt -name "scratch-cal" -e calcurse
-# default keyboard us international
-exec --no-startup-id setxkbmap -layout us -variant altgr-intl
-# hide mouse after brief period
-exec --no-startup-id unclutter
 
 # Binds
 #=================
@@ -114,7 +115,7 @@ bindsym $mod+Ctrl+f exec "urxvt -e sudo ranger"
 bindsym $mod+Shift+d exec urxvt -e ranger -name "float"
 
 bindsym $mod+e exec "urxvt -e vim"
-bindsym $mod+Ctrl+e  "exec urxvt -e sudo vim"
+bindsym $mod+Ctrl+e  exec "urxvt -e sudo vim"
 
 bindsym $mod+Shift+m exec i3-msg exec thunderbird; mark ws5; $ws5
 
@@ -129,10 +130,10 @@ bindsym $mod+n exec i3-msg exec nicotine; mark ws10; $ws10
 # F6-F12 term   urxvt    
 
 bindsym Shift+F1 exec urxvt -name "scratch-mus"  -e cmus
-bindsym Shift+F2 exec urxvt -name "scratch-oct" -e octave-cli --quiet --traditional
+bindsym Shift+F2 exec urxvt -name "scratch-oct"  -e octave-cli --quiet --traditional
 bindsym Shift+F3 exec urxvt -name "scratch-cal"  -e calcurse
-bindsym Shift+F4 exec urxvt -name "scratch-irc"  -e weechat
-bindsym Shift+F5 exec urxvt -name "scratch-tor"  -e transmission
+bindsym Shift+F4 exec urxvt -name "scratch-tmux" -e tmux
+bindsym Shift+F5 exec urxvt -name "scratch-tor"  -e weechat
 
 bindsym Shift+F6  exec urxvt -name "scratch-term-6"
 bindsym Shift+F7  exec urxvt -name "scratch-term-7"
@@ -145,8 +146,8 @@ bindsym Shift+F12 exec urxvt -name "scratch-term-12"
 bindsym $mod+F1  exec "i3-msg '[instance=scratch-mus] scratchpad show'"
 bindsym $mod+F2  exec "i3-msg '[instance=scratch-oct] scratchpad show'"
 bindsym $mod+F3  exec "i3-msg '[instance=scratch-cal] scratchpad show'"
-bindsym $mod+F4  exec "i3-msg '[instance=scratch-irc] scratchpad show'"
-bindsym $mod+F5  exec "i3-msg '[instance=scratch-tor] scratchpad show'"
+bindsym $mod+F4  exec "i3-msg '[instance=scratch-tmux] scratchpad show'"
+bindsym $mod+F5  exec "i3-msg '[instance=scratch-irc] scratchpad show'"
 
 bindsym $mod+F6  exec "i3-msg '[instance=scratch-term-6 ] scratchpad show'"
 bindsym $mod+F7  exec "i3-msg '[instance=scratch-term-7 ] scratchpad show'"
@@ -192,11 +193,11 @@ assign [con_mark="ws10"] $ws10
 for_window [instance="float"] floating enable
 for_window [window_role="pop-up"] floating enable 
 for_window [window_role="task_dialog"] floating enable
+for_window [urgent="latest"] focus
 
-for_window [urgent=latest] focus
 for_window [instance="scratch"] move scratchpad
-
 for_window [instance="scratch"] border pixel 2
+
 for_window [instance="scratch-oct"] resize set 650 300
 
 for_window [window_role="gimp-dock"] floating disable
@@ -210,8 +211,8 @@ for_window [window_role="gimp-image-window"] resize width grow 80 px or 80ppt
 #font pango:monospace 10
 font pango:DejaVu Sans Mono 10
 
-
-# Borders #=================
+# Borders
+#=================
 new_window pixel 1
 
 # Colors
