@@ -19,17 +19,17 @@ set $mod  Mod4
 set $mod2 Mod1
 
 # Workspace name tags
-set $ws0  workspace 0:admn
-set $ws1  workspace 1:home
-set $ws2  workspace 2:web 
-set $ws3  workspace 3:fm  
-set $ws4  workspace 4:offc
-set $ws5  workspace 5:mail
-set $ws6  workspace 6:graf
-set $ws7  workspace 7:code
-set $ws8  workspace 8:
-set $ws9  workspace 9:
-set $ws10 workspace 10:N+ 
+set $ws0  workspace  0:admn
+set $ws1  workspace  1:home
+set $ws2  workspace  2:web 
+set $ws3  workspace  3:fm  
+set $ws4  workspace  4:code
+set $ws5  workspace  5:mail
+set $ws6  workspace  6:graf
+set $ws7  workspace  7:rand
+set $ws8  workspace  8:rand
+set $ws9  workspace  9:rand
+set $ws10 workspace 10:N+  
 
 # bg and lock img
 set $bg ~/media/.bg
