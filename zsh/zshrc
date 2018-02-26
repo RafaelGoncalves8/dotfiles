@@ -84,6 +84,7 @@ alias -g ls="ls --color"
 alias -g la="ls -lah --color"
 alias -g grep="grep --color"
 alias -g ns="sudo netctl stop-all && sudo netctl start"
+alias -g td="todo.py"
 
 #cd
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there
