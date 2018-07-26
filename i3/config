@@ -47,6 +47,8 @@ set $white   "#d0d0d0"
 
 # Execs at startup
 #=================
+# correct urxvt
+exec ~/scripts/update_xresources.sh
 # default workspace
 exec --no-startup-id i3-msg $ws1
 # windom composition manager
@@ -90,8 +92,9 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
 # screenshots on media/img/screenshots
-bindsym --release Print exec scrot '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/screenshots/'
-bindsym --release Shift+Print exec scrot -s '%Y-%m-%d-%T_$wx$h_scrot.png' -e 'mv $f ~/media/screenshots/'
+bindsym --release Print exec scrot -e 'mv $f ~/media/img/screenshots/'
+bindsym --release Shift+Print exec scrot -se 'mv $f ~/media/img/screenshots/'
+bindsym --release $mod+Print exec scrot -ue 'mv $f ~/media/img/screenshots/'
 
 #i3lock
 bindsym Ctrl+$mod+space exec i3lock -d -i $lock -u -c 333333 -e -f
@@ -159,7 +162,7 @@ mode "$mode_system" {
     # reload the configuration file
     bindsym c reload, mode "default"
     # exit i3 (logs you out of your X session)
-    bindsym e exec --no-startup-id i3msg exit, mode "default"
+    bindsym e exec --no-startup-id "i3msg exit", mode "default"
     bindsym s exec --no-startup-id systemctl suspend, mode "default"
     bindsym h exec --no-startup-id systemctl hibernate, mode "default"
     bindsym Shift+r exec --no-startup-id systemctl reboot, mode "default"

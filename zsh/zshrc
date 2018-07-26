@@ -30,7 +30,6 @@ export VISUAL=$EDITOR
 export TERM=xterm-256color
 
 source $DOTFILES/zsh/gitstatus.sh
-source $HOME/.greengrocer.sh
 
 
 ## Configuration ##
@@ -82,9 +81,11 @@ bindkey "^N" history-search-forward
 #common comands
 alias -g ls="ls --color"
 alias -g la="ls -lah --color"
-alias -g grep="grep --color"
+alias -g g="grep --color"
 alias -g ns="sudo netctl stop-all && sudo netctl start"
 alias -g td="todo.py"
+alias -g e="$EDITOR"
+alias -g se="sudo -E $EDITOR"
 
 #cd
 # If you type foo, and it isn't a command, and it is a directory in your cdpath, go there

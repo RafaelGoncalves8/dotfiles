@@ -268,11 +268,11 @@ autocmd FileType html inoremap ;ol <ol><Enter><li></li><Enter></ol><Enter><Enter
 """"""""""""""""""""""
 " imap ;c ç
 " imap [e é
-" imap ;e ê
+ imap ;e ê
 " imap [a á
 " imap {a à
-" imap ;a ã
-" imap ;o õ
+ imap ;a ã
+ imap ;o õ
 " imap [i í
 
 

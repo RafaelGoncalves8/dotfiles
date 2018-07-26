@@ -45,6 +45,15 @@
 
 Xterm.utf8: 1
 
+!################
+!# Xft settings #
+!################
+!
+Xft.dpi:        96
+Xft.antialias:  true
+Xft.rgba:       rgb
+Xft.hinting:    true
+Xft.hintstyle:  hintfull
 
 !#########
 !# URxvt #
@@ -54,18 +63,19 @@ URxvt.depth:        32
 URxvt.background:   [75]#000000
 URxvt.transparence: false
 
-URxvt.font:         xft:monospace:size=11
+! URxvt.font:         xft:monospace:size=11
+URxvt.font:         xft:inconsolata:size=12
 
 URxvt.scrollBar:    false
 URxvt.cursorColor:  #66ff66
 URxvt.colorUL:      #9B48EF
 
 ! Extensions
-! matcher - enable clicking in links
-! resize-font - enable resizing fonts on-the-go
-! url-select  - vim-like navigation trhough links
-! keyboard-select - vim-like navigation trhough terminal
-URxvt.perl-ext-common: default,matcher,resize-font,url-select,keyboard-select
+!matcher - enable clicking in links
+!resize-font - enable resizing fonts on-the-go
+!url-select  - vim-like navigation trhough links
+!keyboard-select - vim-like navigation trhough terminal
+URxvt.perl-ext-common: default,matcher,resize-font,keyboard-select,url-select
 URxvt.perl-lib:        $HOME/.config/Scripts
 
 ! matcher
@@ -82,7 +92,8 @@ URxvt.url-select.launcher:  /usr/bin/xdg-open
 URxvt.url-select.underline: true
 
 ! keyboard-select
-URxvt.keysym.M-Escape:  perls:keyboard-select:activate
+URxvt.keysym.M-Escape:              perl:keyboard-select:activate
+URxvt.keyboard-select.clipboard:    true
 
 
 
