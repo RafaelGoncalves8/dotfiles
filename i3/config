@@ -32,7 +32,7 @@ set $ws9  workspace  9:rand
 set $ws10 workspace 10:down
 
 # bg and lock img
-set $bg ~/media/.bg
+set $bg "~/media/.bg"
 set $lock ~/media/.lock.png
 
 #colors
@@ -54,7 +54,7 @@ exec --no-startup-id i3-msg $ws1
 # windom composition manager
 exec_always --no-startup-id xcompmgr -c -f -n -D 3
 # bg
-exec --no-startup-id feh --bg-fill $bg
+exec_always --no-startup-id feh --bg-fill ~/media/.bg
 # default keyboard us international
 exec --no-startup-id setxkbmap -layout us -variant altgr-intl
 # hide mouse after brief period
