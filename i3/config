@@ -336,11 +336,12 @@ bindsym $mod+Shift+c move container to workspace back_and_forth; workspace back_
 bar {
         position top
         font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        font pango:DejaVu Sans Mono 9
+        #font pango:DejaVu Sans Mono 9
+        font xft:inconsolata 11 
         status_command i3status
 
         colors {                  #foreground #  #background
-                focused_workspace "#000000" "#8431d7" "#ffffff"
+                focused_workspace "#000000" "#8431d7" "#e0e0e0"
                 }
 }
 
