@@ -229,6 +229,14 @@ client.urgent           $red      $red       $white   $magenta   $red
 client.placeholder      $black    $black     $white   $green     $black
 client.background       $black
 
+# Gaps
+#=================
+smart_gaps on
+smart_borders on
+
+gaps inner 15 
+gaps outer -5
+
 # Movements
 #=================
 # kill focused window
