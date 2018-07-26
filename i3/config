@@ -65,6 +65,8 @@ exec --no-startup-id redshift
 exec --no-startup-id urxvt -name "scratch-mus" -e cmus
 # octave on scratch-2
 exec --no-startup-id urxvt -name "scratch-oct" -e octave-cli -q --traditional
+# capslock as escape and ctrl modifier
+exec --no-startup-id "~/scripts/capslock.sh"
 # sync and launch calcurse on scratch-3
 exec --no-startup-id "~/scripts/sync-cal.sh"
 exec --no-startup-id "~/scripts/sync-notes.sh"
