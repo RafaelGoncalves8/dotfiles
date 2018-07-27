@@ -31,10 +31,6 @@ set $ws8  workspace  8:rand
 set $ws9  workspace  9:rand
 set $ws10 workspace 10:down
 
-# bg and lock img
-set $bg "~/media/.bg"
-set $lock ~/media/.lock.png
-
 #colors
 set $black   "#101010"
 set $red     "#f92672"
