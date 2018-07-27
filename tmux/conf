@@ -16,6 +16,8 @@ set -g mouse on #set mouse on
 ##Bindings and Alias##
 ######################
 
+setw -g mode-keys vi
+
 # remap prefix to ^a
 set -g prefix C-a
 unbind C-b
@@ -35,9 +37,9 @@ bind-key -n C-k if-shell "$is_vim" "send-keys C-k"  "select-pane -U"
 bind-key -n C-l if-shell "$is_vim" "send-keys C-l"  "select-pane -R"
 bind-key -n C-\ if-shell "$is_vim" "send-keys C-\\" "select-pane -l"
 
-# Use C-h and C-l to cycle thru panes
-bind -r C-h select-window -t :-
-bind -r C-l select-window -t :+
+# Use C-j and C-k to cycle thru panes
+bind -r C-j select-window -t :-
+bind -r C-k select-window -t :+
 
 # Shortcuts
 bind-key -n C-t new-window
@@ -58,8 +60,8 @@ unbind [
 bind Escape copy-mode
 unbind p
 bind p paste-buffer
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
+bind-key -T copy-mode-vi 'v' send-keys -X begin-selection
+bind-key -T copy-mode-vi 'y' send-keys -X copy-selection
 
 ##Layout and Colors##
 #####################
