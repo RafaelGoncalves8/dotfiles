@@ -56,8 +56,8 @@ let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
 let g:syntastic_error_symbol = ">>"
-let g:syntastic_style_symbol = ">"
-let g:syntastic_warning_symbol = "!!"
+let g:syntastic_style_symbol = "S>"
+let g:syntastic_warning_symbol = "W>"
 let g:syntastic_c_compiler_options = ' -ansi'
 let g:syntastic_mode_map = { 'mode': 'passive',
                           \ 'active_filetypes': [],

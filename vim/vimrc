@@ -168,13 +168,26 @@ map <F8> :setlocal spell! spelllang=pt_br<CR>
 
 " F1 to compile any file
 noremap <F1> :make<CR>
-" F3 to convert markdown to pdf
-noremap <F3> :!pandoc -o %<.pdf %<CR><CR>
-" F5 to convert latex to pdf
-noremap <F4> :!pdflatex %<CR><CR>
 " F2 to run
-autocmd Filetype c  map <F2> :!./%<
-autocmd FileType py map <F2> :!python %
+autocmd Filetype c  map <F2> :!./%< <CR>
+autocmd FileType py map <F2> :!python % <CR>
+" F3 to check syntax
+nnoremap <silent> <F3> :SyntasticCheck<CR>
+nnoremap <silent> <leader><F3> :SyntasticCheck off<CR>
+" F4 to gdb
+autocmd FileType c map <F4> :!gdb ./%< 
+" F5 to valgrind
+autocmd FileType c map <F5> :!valgrind --leak-check=full ./%< 
+
+" Make "
+""""""""
+" C99
+autocmd FileType c set makeprg=gcc\ -g\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm
+" C89
+autocmd FileType c set makeprg=gcc\ -g\ --ansi\ --pedantic\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm
+autocmd FileType arduino set makeprg=arduino\ --verify
+autocmd FileType markdown set makeprg=pandoc -o %<.pdf %<CR><CR>
+autocmd FileType tex set makeprg=pdflatex %<CR><CR>
 
 
 """"""""""
@@ -195,14 +208,19 @@ if has("autocmd") && exists("+omnifunc")
    \ endif
 endif 
 
-" Make "
-""""""""
-autocmd FileType c set makeprg=gcc\ -g\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm autocmd FileType arduino set makeprg=arduino\ --verify
 
 " Templates "
 """""""""""""
 autocmd FileType html inoremap ;tmp <ESC>:read ~/.vim/templates/template.html<CR>
 autocmd FileType arduino inoremap ;tmp <ESC>:read ~/.vim/templates/template.ino<CR>
+
+" C "
+"""""
+autocmd FileType c inoremap ;main int main(){<CR>}<Esc>ko
+autocmd FileType c inoremap ;{ {<CR>}<Esc>ko
+autocmd FileType c set shiftwidth=2
+autocmd FileType c set tabstop=2
+
 
 " Arduino "
 """""""""""
@@ -266,14 +284,12 @@ autocmd FileType html inoremap ;ol <ol><Enter><li></li><Enter></ol><Enter><Enter
 
 " International keys "
 """"""""""""""""""""""
-" imap ;c ç
-" imap [e é
- imap ;e ê
-" imap [a á
-" imap {a à
+ imap ^e ê
+ imap ^a â
+ imap ^o ô
+ imap ;;a à
  imap ;a ã
  imap ;o õ
-" imap [i í
 
 
 """"""""""
