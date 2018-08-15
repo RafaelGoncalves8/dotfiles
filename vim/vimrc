@@ -75,13 +75,13 @@ set secure         " Disable unsafe commands in per-directory .vimrc files.
 set foldmethod=syntax   " fold by syntax if existent
 set foldnestmax=5       " max fold level
 set nofoldenable        " disable previous fold on file
-set foldlevel=2         " begin with 2 level fold
+set foldlevel=2         " dont fold single line
 
-" allow manual folding also
-augroup vimrc
-    au BufReadPre * setlocal foldmethod=syntax
-    au BufWinEnter * if &fdm == 'syntax' | setlocal fdm=manual | endif
-augroup END
+"" allow manual folding also // conflicts with syntax
+" augroup vimrc
+"     au BufReadPre * setlocal foldmethod=syntax
+"     au BufWinEnter * if &fdm == 'syntax' | setlocal fdm=manual | endif
+" augroup END
 
 " Reload file without prompting if it has changed on disk.
 " Will still prompt if there is unsaved text in the buffer.
@@ -232,6 +232,9 @@ autocmd FileType c inoremap ;{ {<CR>}<Esc>ko
 autocmd FileType c set shiftwidth=2
 autocmd FileType c set tabstop=2
 
+" Python "
+""""""""""
+autocmd FileType python setlocal foldmethod=indent
 
 " Arduino "
 """""""""""
