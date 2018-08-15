@@ -65,12 +65,23 @@ set softtabstop=4
 set hidden         " hide vim buffers instead of closing them
 
 set showbreak=\\
-set listchars=nbsp:·,tab:▸\ ,trail:·,eol:¬ " Configure how invisibles appear.
+set listchars=nbsp:·,tab:▸\ ,trail:· " Configure how invisibles appear.
 set list           " show blank chars
 set mouse=a        " mouse selects switches to visual mode
 let g:netrw_liststyle=3 " Tree style for explore mode :Explore
 set exrc           " Enable per-directory .vimrc files.
 set secure         " Disable unsafe commands in per-directory .vimrc files.
+
+set foldmethod=syntax   " fold by syntax if existent
+set foldnestmax=5       " max fold level
+set nofoldenable        " disable previous fold on file
+set foldlevel=2         " begin with 2 level fold
+
+" allow manual folding also
+augroup vimrc
+    au BufReadPre * setlocal foldmethod=syntax
+    au BufWinEnter * if &fdm == 'syntax' | setlocal fdm=manual | endif
+augroup END
 
 " Reload file without prompting if it has changed on disk.
 " Will still prompt if there is unsaved text in the buffer.
