@@ -6,7 +6,7 @@
 # |_____/                         |___/
 
 #=======================================#
-#       Rafael Goncalves - 2017         #
+#       Rafael Goncalves - 2019         #
 #=======================================#
 
 #=======================================
@@ -43,29 +43,22 @@ set $white   "#d0d0d0"
 
 # Execs at startup
 #=================
-# correct urxvt
-exec ~/scripts/update_xresources.sh
 # default workspace
 exec --no-startup-id i3-msg $ws1
 # windom composition manager
 exec_always --no-startup-id xcompmgr -c -f -n -D 3
 # bg
-exec_always --no-startup-id feh --bg-fill ~/media/.bg
-# default keyboard us international
-exec --no-startup-id setxkbmap -layout us -variant altgr-intl
+exec_always --no-startup-id feh --bg-fill ~/media/bg
 # hide mouse after brief period
 exec --no-startup-id unclutter
 # redshift
 exec --no-startup-id redshift
-# cmus on scratch-1
-exec --no-startup-id urxvt -name "scratch-mus" -e cmus
+# ncmpcpp on scratch-1
+exec --no-startup-id urxvt -name "scratch-mus" -e ncmpcpp
 # octave on scratch-2
 exec --no-startup-id urxvt -name "scratch-oct" -e octave-cli -q --traditional
-# capslock as escape and ctrl modifier
-exec --no-startup-id "~/scripts/capslock.sh"
 # sync and launch calcurse on scratch-3
 exec --no-startup-id "~/scripts/sync-cal.sh"
-exec --no-startup-id "~/scripts/sync-notes.sh"
 exec --no-startup-id urxvt -name "scratch-cal" -e calcurse
 # tmux on scratch-4
 exec --no-startup-id urxvt -name "scratch-tmux" -e tmux
@@ -113,7 +106,7 @@ bindsym $mod+Shift+f exec i3-msg exec pcmanfm; mark ws3; $ws3
 bindsym $mod+Shift+Ctrl+f  exec i3-msg exec gksu pcmanfm; mark ws3; $ws3
 bindsym $mod+f exec "urxvt -e ranger"
 bindsym $mod+Ctrl+f exec "urxvt -e sudo ranger"
-bindsym $mod+Shift+d exec urxvt -e ranger -name "float"
+bindsym $mod+Shift+d exec "urxvt -name float -e ranger"
 
 bindsym $mod+e exec "urxvt -e vim"
 bindsym $mod+Ctrl+e  exec "urxvt -e sudo vim"
@@ -123,7 +116,7 @@ bindsym $mod+Shift+m exec i3-msg exec thunderbird; mark ws5; $ws5
 bindsym $mod+n exec i3-msg exec nicotine; mark ws10; $ws10
 
 ## Scratchpad specifics
-bindsym Shift+F1 exec urxvt -name "scratch-mus"  -e cmus
+bindsym Shift+F1 exec urxvt -name "scratch-mus"  -e ncmpcpp
 bindsym Shift+F2 exec urxvt -name "scratch-oct"  -e octave-cli --quiet --traditional
 bindsym Shift+F3 exec urxvt -name "scratch-cal"  -e calcurse
 bindsym Shift+F4 exec urxvt -name "scratch-tmux" -e tmux
@@ -329,17 +322,18 @@ bindsym $mod+Shift+c move container to workspace back_and_forth; workspace back_
 #=======================================
 # i3bar
 #=======================================
-bar {
-        position top
-        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-        #font pango:DejaVu Sans Mono 9
-        font xft:inconsolata 11 
-        status_command i3status
-
-        colors {                  #foreground #  #background
-                focused_workspace "#000000" "#8431d7" "#e0e0e0"
-                }
-}
+exec_always --no-startup-id $HOME/.config/polybar/launch.sh
+#bar {
+#        position top
+#        font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
+#        #font pango:DejaVu Sans Mono 9
+#        font xft:inconsolata 11 
+#        status_command i3status
+#
+#        colors {                  #foreground #  #background
+#                focused_workspace "#000000" "#8431d7" "#e0e0e0"
+#                }
+#}
 
 #=======================================
 # Hardware specifics
@@ -352,6 +346,7 @@ bindsym XF86MonBrightnessDown exec xbacklight -dec 10
 bindsym XF86AudioRaiseVolume exec amixer -q set Master 5%+ unmute
 bindsym XF86AudioLowerVolume exec amixer -q set Master 5%-
 bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioMicMute exec amixer -q set Capture toggle
 
 bindsym XF86AudioPlay exec cmus toggle
 bindsym XF86AudioStop exec cmus stop
