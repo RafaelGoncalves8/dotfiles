@@ -21,7 +21,6 @@ Plugin 'Shougo/unite.vim'               "buffer manager
 Plugin 'gabrielelana/vim-markdown'      "plugin for taking notes using md
 
 call vundle#end()
-
 filetype plugin indent on
 
 ""Unite""

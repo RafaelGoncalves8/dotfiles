@@ -49,6 +49,7 @@ Xterm.utf8: 1
 !# Xft settings #
 !################
 !
+Xft.size:       12
 Xft.dpi:        96
 Xft.antialias:  true
 Xft.rgba:       rgb

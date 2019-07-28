@@ -5,7 +5,7 @@
 #/___|___/_| |_|_|  \___|
 
 #########################
-# Rafael Goncalves 2017 #
+# Rafael Goncalves 2019 #
 #########################
 
 ## Variables ##
@@ -21,13 +21,13 @@ export BIN=$HOME/bin
 export TMP=$HOME/tmp
 export DOTFILES=$HOME/dotfiles
 
-export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS
+export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS:$HOME/.local/bin
 
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
 export VISUAL=$EDITOR
 
-export TERM=xterm-256color
+export TERM=rxvt-unicode
 
 source $DOTFILES/zsh/gitstatus.sh
 

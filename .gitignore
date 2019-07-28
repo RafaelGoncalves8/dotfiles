@@ -13,3 +13,6 @@ Session.vim
 
 # Auto-generated tag files
 **/tags
+
+# Plugins folder
+vim/vim_folder/bundle
