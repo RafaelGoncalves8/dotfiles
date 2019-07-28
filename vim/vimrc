@@ -5,7 +5,7 @@
 "  \_/ |_|_| |_| |_|_|  \___|
 
 """""""""""""""""""""""""""""""""
-"    Rafael Goncalves - 2018    "
+"    Rafael Goncalves - 2019    "
 """""""""""""""""""""""""""""""""
 
 """"""""""""""""""
@@ -53,14 +53,15 @@ set hlsearch       " highlight searches
 set ignorecase     " ignore letter cases
 set smartcase      " case-sensitive when with capital letters
 
-set backupdir=~/.vim/backup
-set directory=~/.vim/backup
+" Backup in folder different than the actual file
+" set backupdir=~/.vim/backup
+" set directory=~/.vim/backup
 
 set backspace=indent,eol,start  " allow backspacing autoindent
-set shiftwidth=4   " identation = 4 spaces
-set tabstop=4      " tab navigates between 4 spaces gaps
-set expandtab
-set softtabstop=4
+set shiftwidth=4   " default identation = 4 spaces
+set tabstop=4      " default tab navigates between 4 spaces gaps
+set expandtab      " tabs to spaces
+set softtabstop=4  " default tab width
 
 set hidden         " hide vim buffers instead of closing them
 
@@ -73,7 +74,7 @@ set exrc           " Enable per-directory .vimrc files.
 set secure         " Disable unsafe commands in per-directory .vimrc files.
 
 set foldmethod=syntax   " fold by syntax if existent
-set foldnestmax=5       " max fold level
+set foldnestmax=3       " max fold level
 set nofoldenable        " disable previous fold on file
 set foldlevel=2         " dont fold single line
 
@@ -155,6 +156,10 @@ nmap <leader>P "+P
 vmap <leader>p "+p
 vmap <leader>P "+P
 
+" Avoid unrecoverable <c-u> in insert mode
+inoremap <c-u> <c-g>u<c-u>
+inoremap <c-w> <c-g>u<c-w>
+
 " Keep selection when indenting in v-mode
 vnoremap > >gv
 vnoremap < <gv
@@ -192,13 +197,17 @@ autocmd FileType c map <F5> :!valgrind --leak-check=full ./%<
 
 " Make "
 """"""""
-" C99
-autocmd FileType c set makeprg=gcc\ -g\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm
 " C89
 autocmd FileType c set makeprg=gcc\ -g\ --ansi\ --pedantic\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm
+" C99
+autocmd FileType c set makeprg=gcc\ -g\ -Wall\ -Wextra\ -o'%<'\ '%'\ -lm
+" Arduino
 autocmd FileType arduino set makeprg=arduino\ --verify
+" Markdown
 autocmd FileType markdown set makeprg=pandoc -o %<.pdf %<CR><CR>
+" Latex
 autocmd FileType tex set makeprg=pdflatex %<CR><CR>
+autocmd FileType latex set makeprg=pdflatex %<CR><CR>
 
 
 """"""""""
@@ -301,6 +310,7 @@ autocmd FileType html inoremap ;ol <ol><Enter><li></li><Enter></ol><Enter><Enter
  imap ^e ê
  imap ^a â
  imap ^o ô
+ imap ;;e è
  imap ;;a à
  imap ;a ã
  imap ;o õ
