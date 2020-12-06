@@ -16,25 +16,36 @@ Plugin 'scrooloose/syntastic'           "integrates spell checkers
 Plugin 'vim-airline/vim-airline'        "airline statusbar
 Plugin 'vim-airline/vim-airline-themes' "airline themes
 Plugin 'tpope/vim-fugitive'             "git indicator
-Plugin 'tpope/vim-vinegar'              "more functionalities :E mode
-Plugin 'Shougo/unite.vim'               "buffer manager
+Plugin 'tpope/vim-surround'
+" Plugin 'tpope/vim-vinegar'              "more functionalities :E mode
+" Plugin 'Shougo/unite.vim'               "buffer manager
 Plugin 'gabrielelana/vim-markdown'      "plugin for taking notes using md
+Plugin 'junegunn/goyo.vim'
+Plugin 'supercollider/scvim'
+Plugin 'tidalcycles/vim-tidal'
+Plugin 'sheerun/vim-polyglot'
+" Plugin 'dense-analysis/ale'
+Plugin 'neoclide/coc.nvim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plugin 'junegunn/fzf.vim'
 
 call vundle#end()
 filetype plugin indent on
 
+
 ""Unite""
 """""""""
 " opening in the same window
-nmap <leader>u <nop>
-nmap <leader>uf :Unite file -no-split -buffer-name=files<cr>
-nmap <leader>ur :Unite file_mru -no-split -buffer-name=mru<cr>
-nmap <leader>ub :Unite buffer -no-split -buffer-name=buffers<cr>
-nmap <leader>uy :Unite history/yank -no-split -buffer-name=yank<cr>
+" nmap <leader>u <nop>
+" nmap <leader>uf :Unite file -no-split -buffer-name=files<cr>
+" nmap <leader>ur :Unite file_mru -no-split -buffer-name=mru<cr>
+" nmap <leader>ub :Unite buffer -no-split -buffer-name=buffers<cr>
+" nmap <leader>uy :Unite history/yank -no-split -buffer-name=yank<cr>
 
 " new window then Unite file
-nmap <leader>nj :split<CR><c-w>j<Leader>uf
-nmap <leader>nl :vsplit<CR><c-w>l<Leader>uf
+" nmap <leader>nj :split<CR><c-w>j<Leader>uf
+" nmap <leader>nl :vsplit<CR><c-w>l<Leader>uf
 
 ""Fugitive""
 """"""""""""
@@ -162,3 +173,72 @@ let g:airline#extensions#tabline#buffer_idx_format = {
 "" Vim Markdown ""
 """"""""""""""""""
 let g:markdown_enable_spell_checking = 0
+
+" Vim fzf "
+"""""""""""
+nnoremap <C-p> :GFiles<Cr>
+nnoremap <C-g> :Ag<Cr>
+nnoremap <C-b> :Buffers<CR>
+
+" Vim CoC "
+"""""""""""
+
+" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
+" delays and poor user experience.
+set updatetime=1000
+
+" Don't pass messages to |ins-completion-menu|.
+set shortmess+=c
+" set shortmess=aFc
+
+" Signcolumn and number
+set signcolumn=number
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-@> coc#refresh()
+
+" Use `[g` and `]g` to navigate diagnostics
+" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Hover
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  elseif (coc#rpc#ready())
+    call CocActionAsync('doHover')
+  else
+    execute '!' . &keywordprg . " " . expand('<cword>')
+  endif
+endfunction
+
+command! -nargs=0 Prettier :call CocAction('runCommand', 'prettier.formatFile')
+
+""" ALE ""
+""""""""""
+" let g:ale_disable_lsp = 1
+"
+" nmap <silent> ]c <Plug>(ale_previous_wrap)
+" nmap <silent> [c <Plug>(ale_next_wrap)
+"
+" nmap K <Plug>(ale_hover)
+"
+" nmap <leader>af <Plug>(ale_fix)
+" nmap <leader>ar <Plug>(ale_rename)
+" nmap <leader>
+
+" Git gutter "
+""""""""""""""
+highlight! link SignColumn LineNr
+let g:gitgutter_enabled = 0
+nmap <leader>g  :GitGutterToggle<cr>
+

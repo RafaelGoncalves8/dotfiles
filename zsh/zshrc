@@ -20,8 +20,10 @@ export SCRIPTS=$HOME/scripts
 export BIN=$HOME/bin
 export TMP=$HOME/tmp
 export DOTFILES=$HOME/dotfiles
+export TIDAL_BOOT_PATH=/home/rafael/tidal/bootTidal.hs
 
-export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS:$HOME/.local/bin
+export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS:$HOME:/.local/bin:/opt
+export LD_LIBRARY_PATH=/opt/OpenBLAS/lib:$LD_LIBRARY_PATH
 
 export EDITOR="vim"
 export USE_EDITOR=$EDITOR
@@ -141,3 +143,8 @@ PROMPT='[%{$fg[magenta]%}%m %{$fg_bold[magenta]%}%1~%{$reset_color%}]%(!.#.$) '
 #RPrompt
 RPROMPT='$(git_super_status) %(1j.[%j].)'
 
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+source /home/rafael/inbox/cl/env/bin/activate.sh

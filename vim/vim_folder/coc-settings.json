@@ -1,0 +1,4 @@
+{
+    "coc.preferences.formatOnSaveFiletypes": ["jsx", "javascript", "css", "scss"],
+    "prettier.eslintIntegration": true
+}

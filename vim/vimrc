@@ -12,7 +12,6 @@
 ""Initialization""
 """"""""""""""""""
 
-set nocompatible   " not compatible with vi = more iMprovements
 syntax on          " syntax highlighting
 set encoding=utf-8 " in case $LANG is not properly definded
 
@@ -69,9 +68,17 @@ set showbreak=\\
 set listchars=nbsp:·,tab:▸\ ,trail:· " Configure how invisibles appear.
 set list           " show blank chars
 set mouse=a        " mouse selects switches to visual mode
+let g:netrw_banner = 0  " remove informative header
 let g:netrw_liststyle=3 " Tree style for explore mode :Explore
+let g:netrw_winsize=20  " 25% width in Vex or Sex
+set splitbelow     " Split down
+set splitright     " Split right
+
 set exrc           " Enable per-directory .vimrc files.
 set secure         " Disable unsafe commands in per-directory .vimrc files.
+
+" Dont list netrw in Buffers (breaks bn for next buffer)
+" autocmd FileType netrw set nolist
 
 set foldmethod=syntax   " fold by syntax if existent
 set foldnestmax=3       " max fold level
@@ -117,15 +124,16 @@ nmap <C-k> <C-w>k
 nmap <C-l> <C-w>l
 nmap <C-h> <C-w>h
 
-nnoremap <C-@> <Esc>/<++><Enter>"_c4l
-vnoremap <C-@> <Esc>/<++><Enter>"_c4l
-inoremap <C-@> <Esc>/<++><Enter>"_c4l
+nnoremap <C-n> <Esc>/<++><Enter>"_c4l
+vnoremap <C-n> <Esc>/<++><Enter>"_c4l
+inoremap <C-n> <Esc>/<++><Enter>"_c4l
 inoremap ;mrk <++>
 nnoremap <leader>x i<++><ESC>
 
 " List buffers_check(identifier, test_ratio, hash):
 "    return hash(np.int64(identifier)).digest()[-1] < 256 * test_ratio
 " nmap <leader>ls :ls<cr> "useless w/ airline plugin
+"
 " New empty buffer
 nmap <leader>N :enew<cr>
 " New buffer w/ tree of directories
@@ -158,7 +166,8 @@ vmap <leader>P "+P
 
 " Avoid unrecoverable <c-u> in insert mode
 inoremap <c-u> <c-g>u<c-u>
-inoremap <c-w> <c-g>u<c-w>
+" <c-w> conflits with change window
+" inoremap <c-w> <c-g>u<c-w>
 
 " Keep selection when indenting in v-mode
 vnoremap > >gv
@@ -177,6 +186,7 @@ nnoremap <leader>W :w !sudo tee % > /dev/null<CR>
 nnoremap <leader>q :q<cr>
 nnoremap <leader>Q :q!<cr>
 
+" Remove trailing whitespaces
 nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
 map <F7> :setlocal spell! spelllang=en_us<CR>
@@ -191,9 +201,9 @@ autocmd FileType py map <F2> :!python % <CR>
 nnoremap <silent> <F3> :SyntasticCheck<CR>
 nnoremap <silent> <leader><F3> :SyntasticCheck off<CR>
 " F4 to gdb
-autocmd FileType c map <F4> :!gdb ./%< 
+autocmd FileType c map <F4> :!gdb ./%<
 " F5 to valgrind
-autocmd FileType c map <F5> :!valgrind --leak-check=full ./%< 
+autocmd FileType c map <F5> :!valgrind --leak-check=full ./%<
 
 " Make "
 """"""""
@@ -206,8 +216,8 @@ autocmd FileType arduino set makeprg=arduino\ --verify
 " Markdown
 autocmd FileType markdown set makeprg=pandoc -o %<.pdf %<CR><CR>
 " Latex
-autocmd FileType tex set makeprg=pdflatex %<CR><CR>
-autocmd FileType latex set makeprg=pdflatex %<CR><CR>
+autocmd FileType tex set makeprg=xelatex %<CR><CR>
+autocmd FileType latex set makeprg=xelatex %<CR><CR>
 
 
 """"""""""
@@ -218,7 +228,7 @@ autocmd FileType latex set makeprg=pdflatex %<CR><CR>
 """"""""""
 augroup filetypedetect
   au! BufRead,BufNewFile *.m,*.oct set filetype=octave
-augroup END 
+augroup END
 
 " Use keywords from Octave syntax language file for autocomplete
 if has("autocmd") && exists("+omnifunc")
@@ -226,7 +236,7 @@ if has("autocmd") && exists("+omnifunc")
    \ if &omnifunc == "" |
    \ setlocal omnifunc=syntaxcomplete#Complete |
    \ endif
-endif 
+endif
 
 
 " Templates "
@@ -315,17 +325,48 @@ autocmd FileType html inoremap ;ol <ol><Enter><li></li><Enter></ol><Enter><Enter
  imap ;a ã
  imap ;o õ
 
+" 2 spaces for html javascript
+augroup filetypedetect
+  au! BufRead,BufNewFile *.jsx set filetype=javascript
+augroup END
+
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+
+" vIDE "
+""""""""
+nnoremap <leader>L :Lex<cr>
+
+inoremap ;( (<CR>);<C-c>O
+inoremap ,( (<CR>),<C-c>O
+inoremap ;{ {<CR>};<C-c>O
+inoremap ,{ {<CR>},<C-c>O
+inoremap ;[ [<CR>];<C-c>O
+inoremap ,[ [<CR>],<C-c>O
+inoremap :{ () => {<++>}<C-c>F(a
+inoremap :( () => (<++>)<C-c>F(a
+
+map <A-j> nop
+map <A-k> nop
+nnoremap <A-j> :m .+1<CR>==
+nnoremap <A-k> :m .-2<CR>==
+inoremap <A-j> <Esc>:m .+1<CR>==gi
+inoremap <A-k> <Esc>:m .-2<CR>==gi
+vnoremap <A-j> :m '>+1<CR>gv=gv
+vnoremap <A-k> :m '<-2<CR>gv=gv
 
 """"""""""
 ""Layout""
 """"""""""
 
 set background=dark
+highlight Normal ctermfg=none ctermbg=232
 highlight LineNr ctermfg=244
+colorscheme monokai
 
 " Indication for 80 characters width
-let &colorcolumn="80,".join(range(81,999),",") "line warnings 80
-autocmd Filetype python let &colorcolumn="72,".join(range(72,999),",") "line warnings 72
+let &colorcolumn="80,".join(range(81,9999),",") "line warnings 80
+autocmd Filetype python let &colorcolumn="72,".join(range(72,9999),",") "line warnings 72
 
 
 highlight ColorColumn ctermbg=none cterm=bold guibg=#2c2d27
