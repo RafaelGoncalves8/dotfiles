@@ -22,7 +22,7 @@ export TMP=$HOME/tmp
 export DOTFILES=$HOME/dotfiles
 export TIDAL_BOOT_PATH=/home/rafael/tidal/bootTidal.hs
 
-export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS:$HOME:/.local/bin:/opt
+export PATH=$PATH:$SCRIPTS:$BIN:$BUILDS:$HOME:/.local/bin:/opt:$HOME/.yarn/bin:$HOME/.local/bin
 export LD_LIBRARY_PATH=/opt/OpenBLAS/lib:$LD_LIBRARY_PATH
 
 export EDITOR="vim"

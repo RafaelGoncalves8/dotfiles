@@ -3,7 +3,7 @@
 	name = Rafael Goncalves
 	signingkey = 57FE1F127D4132E0
 [push]
-	default = matching
+	default = upstream
 [alias]
 	lg = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
 [sendemail]
@@ -14,3 +14,5 @@
     from = rafaelgoncalves@riseup.net
     supresscc = all
 
+[diff]
+	tool = vimdiff

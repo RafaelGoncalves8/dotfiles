@@ -1,7 +1,6 @@
 """"""""""
 ""Vundle""
 """"""""""
-set nocompatible
 filetype off
 
 " set the runtime path to include Vundle and initialize
@@ -29,6 +28,7 @@ Plugin 'neoclide/coc.nvim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plugin 'junegunn/fzf.vim'
+Plugin 'skammer/vim-css-color'
 
 call vundle#end()
 filetype plugin indent on
@@ -185,7 +185,7 @@ nnoremap <C-b> :Buffers<CR>
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
-set updatetime=1000
+set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -242,3 +242,4 @@ highlight! link SignColumn LineNr
 let g:gitgutter_enabled = 0
 nmap <leader>g  :GitGutterToggle<cr>
 
+let g:cssColorVimDoNotMessMyUpdatetime = 1

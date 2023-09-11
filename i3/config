@@ -46,7 +46,8 @@ set $white   "#d0d0d0"
 # default workspace
 exec --no-startup-id i3-msg $ws1
 # windom composition manager
-exec_always --no-startup-id xcompmgr -c -f -n -D 3
+exec_always --no-startup-id xcompmgr -c -f -n -D 1
+# exec_always --no-startup-id compton
 # bg
 exec_always --no-startup-id feh --bg-fill ~/media/bg
 # hide mouse after brief period
@@ -69,7 +70,7 @@ exec --no-startup-id urxvt -name "scratch-tmux" -e tmux
 # Binds
 #=================
 #Keyboard
-bindsym $mod+Prior exec setxkbmap -layout us -variant altgr-intl
+bindsym $mod+Prior exec setxkbmap -layout us -variant intl
 bindsym $mod+Next  exec setxkbmap br
 
 # For mouse
@@ -84,8 +85,14 @@ bindsym $mod+d exec --no-startup-id dmenu_run
 
 # screenshots on media/img/screenshots
 bindsym --release Print exec scrot -e 'mv $f ~/media/img/screenshots/'
-bindsym --release Shift+Print exec scrot -se 'mv $f ~/media/img/screenshots/'
-bindsym --release $mod+Print exec scrot -ue 'mv $f ~/media/img/screenshots/'
+bindsym --release Shift+Print exec scrot -s -e 'mv $f ~/media/img/screenshots/'
+bindsym --release $mod+Print exec scrot -u -e 'mv $f ~/media/img/screenshots/'
+bindsym --release Ctrl+Print exec scrot -s -e 'xclip -selection clipboard -t image/png -i $f'
+
+bindsym --release $mod+Shift+f exec "~/scripts/screenshot2ocr.sh fra+eng+spa"
+bindsym --release $mod+Shift+p exec "~/scripts/screenshot2ocr.sh por+eng+fra+spa"
+bindsym --release $mod+Shift+i exec "~/scripts/screenshot2ocr.sh eng+fra+spa"
+bindsym --release $mod+Shift+e exec "~/scripts/screenshot2ocr.sh spa+eng+fra"
 
 #i3lock
 bindsym Ctrl+$mod+space exec i3lock -d -i $lock -u -c 333333 -e -f
@@ -102,7 +109,7 @@ bindsym $mod+Shift+Return exec urxvt -name "float"
 bindsym $mod+w exec i3-msg exec firefox; mark ws2; $ws2
 bindsym $mod+Shift+w exec qutebrowser; mark ws2; $ws2
 
-bindsym $mod+Shift+f exec i3-msg exec pcmanfm; mark ws3; $ws3
+# bindsym $mod+Shift+f exec i3-msg exec pcmanfm; mark ws3; $ws3
 bindsym $mod+Shift+Ctrl+f  exec i3-msg exec gksu pcmanfm; mark ws3; $ws3
 bindsym $mod+f exec "urxvt -e ranger"
 bindsym $mod+Ctrl+f exec "urxvt -e sudo ranger"

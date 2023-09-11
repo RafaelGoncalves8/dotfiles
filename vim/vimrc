@@ -11,7 +11,6 @@
 """"""""""""""""""
 ""Initialization""
 """"""""""""""""""
-
 syntax on          " syntax highlighting
 set encoding=utf-8 " in case $LANG is not properly definded
 
@@ -26,14 +25,9 @@ filetype off       " turn off and on for proper plugin init
 source ~/dotfiles/vim/vundle.vim " vundle manager
 filetype plugin indent on
 
-
-
 """""""""""""""""
 ""Configuration""
 """""""""""""""""
-
-""Status and command bar""
-""""""""""""""""""""""""""
 set ruler          " show line/column
 set number         " show numbered lines
 set relativenumber " show relative numbers instead
@@ -43,27 +37,17 @@ set laststatus=2   " 2 lines for the status line
 set cmdheight=2    " 2 lines for cmd prompt
 set wildmode=longest,list,full
 set wildmenu       " better command-bar completion
-
 set scrolloff=5    " lines under and above cursor to show when scrolling
-
 set confirm        " confirm warning before closing
-
 set hlsearch       " highlight searches
 set ignorecase     " ignore letter cases
 set smartcase      " case-sensitive when with capital letters
-
-" Backup in folder different than the actual file
-" set backupdir=~/.vim/backup
-" set directory=~/.vim/backup
-
 set backspace=indent,eol,start  " allow backspacing autoindent
 set shiftwidth=4   " default identation = 4 spaces
 set tabstop=4      " default tab navigates between 4 spaces gaps
 set expandtab      " tabs to spaces
 set softtabstop=4  " default tab width
-
 set hidden         " hide vim buffers instead of closing them
-
 set showbreak=\\
 set listchars=nbsp:·,tab:▸\ ,trail:· " Configure how invisibles appear.
 set list           " show blank chars
@@ -73,101 +57,92 @@ let g:netrw_liststyle=3 " Tree style for explore mode :Explore
 let g:netrw_winsize=20  " 25% width in Vex or Sex
 set splitbelow     " Split down
 set splitright     " Split right
-
 set exrc           " Enable per-directory .vimrc files.
 set secure         " Disable unsafe commands in per-directory .vimrc files.
 
-" Dont list netrw in Buffers (breaks bn for next buffer)
-" autocmd FileType netrw set nolist
+" Reload file without prompting if it has changed on disk.
+" Will still prompt if there is unsaved text in the buffer.
+set autoread
+" Automatically save buffers
+set autowrite
+" Do it when switching buffers
+augroup read_write
+    au WinEnter,BufWinEnter,CursorHold * silent! checktime
+    au BufLeave,FocusLost * silent! wa
+augroup END
+
+""Relative number toggles""
+"""""""""""""""""""""""""""
+nnoremap <leader>m :set invrelativenumber<cr>
+
+augroup auto_relativenumbers
+    autocmd InsertEnter * :set norelativenumber
+    autocmd InsertLeave * :set relativenumber
+
+    autocmd FocusLost * :set norelativenumber
+    autocmd FocusGained * :set relativenumber
+    " TODO: Aparently not working
+augroup END
 
 set foldmethod=syntax   " fold by syntax if existent
 set foldnestmax=3       " max fold level
 set nofoldenable        " disable previous fold on file
 set foldlevel=2         " dont fold single line
 
-"" allow manual folding also // conflicts with syntax
-" augroup vimrc
-"     au BufReadPre * setlocal foldmethod=syntax
-"     au BufWinEnter * if &fdm == 'syntax' | setlocal fdm=manual | endif
-" augroup END
+"""""""""""""
+" Shortcuts "
+"""""""""""""
 
-" Reload file without prompting if it has changed on disk.
-" Will still prompt if there is unsaved text in the buffer.
-set autoread
-" Do it when switching buffers
-au WinEnter,BufWinEnter,CursorHold * silent! checktime
+nnoremap <silent> gj <c-w>j
+nnoremap <silent> gk <c-w>k
+nnoremap <silent> gl <c-w>l
+nnoremap <silent> gh <c-w>h
 
-" Automatically save buffers
-set autowrite
-" When switching to another or leaving focus
-au BufLeave,FocusLost * silent! wa
-
-""Relative number toggles""
-"""""""""""""""""""""""""""
-nnoremap <leader>m :set invrelativenumber<cr>
-
-autocmd InsertEnter * :set norelativenumber
-autocmd InsertLeave * :set relativenumber
-
-au FocusLost * :set norelativenumber
-au FocusGained * :set relativenumber
-" TODO: Aparently not working
-
-
-
-""""""""""""
-""Mappings""
-""""""""""""
-
-nmap <C-j> <C-w>j
-nmap <C-k> <C-w>k
-nmap <C-l> <C-w>l
-nmap <C-h> <C-w>h
-
-nnoremap <C-n> <Esc>/<++><Enter>"_c4l
-vnoremap <C-n> <Esc>/<++><Enter>"_c4l
-inoremap <C-n> <Esc>/<++><Enter>"_c4l
+nnoremap <C-@> <Esc>/<++><Enter>"_c4l
+vnoremap <C-@> <Esc>/<++><Enter>"_c4l
+inoremap <C-@> <Esc>/<++><Enter>"_c4l
 inoremap ;mrk <++>
 nnoremap <leader>x i<++><ESC>
 
-" List buffers_check(identifier, test_ratio, hash):
-"    return hash(np.int64(identifier)).digest()[-1] < 256 * test_ratio
-" nmap <leader>ls :ls<cr> "useless w/ airline plugin
-"
-" New empty buffer
-nmap <leader>N :enew<cr>
-" New buffer w/ tree of directories
-nmap <leader>ne :enew<cr>:Explore<cr>
+nnoremap <leader>L :Lex<cr>
+
+inoremap ;( (<CR>);<C-c>O
+inoremap ,( (<CR>),<C-c>O
+inoremap ;{ {<CR>};<C-c>O
+inoremap ,{ {<CR>},<C-c>O
+inoremap ;[ [<CR>];<C-c>O
+inoremap ,[ [<CR>],<C-c>O
+inoremap :( () => <++><C-c>F(a
+
+" nnoremap <C-u> :m .+1<CR>==
+" nnoremap <C-i> :m .-2<CR>==
+" inoremap <C-u> <Esc>:m .+1<CR>==gi
+" inoremap <C-i> <Esc>:m .-2<CR>==gi
+" vnoremap <C-u> :m '>+1<CR>gv=gv
+" vnoremap <C-i> :m '<-2<CR>gv=gv
+
 " Next/Previous buffer
-nmap <leader>b :bn<cr>
-nmap <leader>B :bp<cr>
+nnoremap <leader>b :bn<cr>
+nnoremap <leader>B :bp<cr>
 " Close current buffer
-nmap <leader>d :bd<cr>
+nnoremap <leader>d :bd<cr>
 " Window creation
-nmap <leader>h  :leftabove vsp<CR><c-w>h
-nmap <leader>l :rightbelow vsp<CR><c-w>l
-nmap <leader>j  :rightbelow sp<CR><c-w>j
-nmap <leader>k    :leftabove sp<CR><c-w>k
-" New window creation
-nmap <leader>nh :leftabove vsp<CR><c-w>h :Explore<CR>
-nmap <leader>nl :rightbelow vsp<CR><c-w>l :Explore<CR>
-nmap <leader>nj :rightbelow sp<CR><c-w>j :Explore<CR>
-nmap <leader>nk :leftabove sp<CR><c-w>k :Explore<CR>
-" Load new in same window
-nmap <leader>nn :Explore<CR>
+nnoremap <leader>h  :leftabove vsp<CR><c-w>h
+nnoremap <leader>l :rightbelow vsp<CR><c-w>l
+nnoremap <leader>j  :rightbelow sp<CR><c-w>j
+nnoremap <leader>k    :leftabove sp<CR><c-w>k
+
 
 " Easier copy/paste from system clipboard
-vmap <leader>y "+y
-vmap <leader>d "+d
-nmap <leader>p "+p
-nmap <leader>P "+P
-vmap <leader>p "+p
-vmap <leader>P "+P
+vnoremap <leader>y "+y
+vnoremap <leader>d "+d
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+vnoremap <leader>P "+P
 
 " Avoid unrecoverable <c-u> in insert mode
-inoremap <c-u> <c-g>u<c-u>
-" <c-w> conflits with change window
-" inoremap <c-w> <c-g>u<c-w>
+" inoremap <c-u> <c-g>u<c-u>
 
 " Keep selection when indenting in v-mode
 vnoremap > >gv
@@ -189,8 +164,56 @@ nnoremap <leader>Q :q!<cr>
 " Remove trailing whitespaces
 nnoremap <leader>r :let _s=@/ <Bar> :%s/\s\+$//e <Bar> :let @/=_s <Bar> :nohl <Bar> :unlet _s <CR>
 
-map <F7> :setlocal spell! spelllang=en_us<CR>
-map <F8> :setlocal spell! spelllang=pt_br<CR>
+"" International keys "
+""""""""""""""""""""""
+imap ^e ê
+imap ^a â
+imap ^o ô
+imap ;;e è
+imap ;;a à
+imap ;a ã
+imap ;o õ
+
+
+" """"""""""
+" ""Others""
+" """"""""""
+augroup filetypedetect
+  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
+  au! BufRead,BufNewFile *.jsx set filetype=javascript
+  au! BufRead,BufNewFile *.scss set filetype=scss
+augroup END
+
+
+let g:vimwiki_ext2syntax = {'.ino': 'arduino', '.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
+
+" Use keywords from Octave syntax language file for autocomplete
+if has("autocmd") && exists("+omnifunc")
+   autocmd Filetype octave
+   \ if &omnifunc == "" |
+   \ setlocal omnifunc=syntaxcomplete#Complete |
+   \ endif
+   " autocmd Filetype css setlocal omnifunc=syntaxcomplete#Complete
+   " autocmd Filetype scss setlocal omnifunc=syntaxcomplete#Complete
+endif
+
+" 2 spaces for html javascript c css
+autocmd FileType html setlocal shiftwidth=2 tabstop=2
+autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
+autocmd FileType jsx setlocal shiftwidth=2 tabstop=2
+autocmd FileType c setlocal shiftwidth=2 tabstop=2
+autocmd FileType css setlocal shiftwidth=2 tabstop=2
+autocmd FileType scss setlocal shiftwidth=2 tabstop=2
+autocmd FileType scss.css setlocal shiftwidth=2 tabstop=2
+autocmd FileType css set iskeyword+=-
+autocmd FileType scss set iskeyword+=-
+autocmd FileType python setlocal foldmethod=indent
+
+""""""
+" FN "
+""""""
+noremap <F7> :setlocal spell! spelllang=en_us<CR>
+noremap <F8> :setlocal spell! spelllang=pt_br<CR>
 
 " F1 to compile any file
 noremap <F1> :make<CR>
@@ -219,149 +242,11 @@ autocmd FileType markdown set makeprg=pandoc -o %<.pdf %<CR><CR>
 autocmd FileType tex set makeprg=xelatex %<CR><CR>
 autocmd FileType latex set makeprg=xelatex %<CR><CR>
 
-
-""""""""""
-""Others""
-""""""""""
-
-" Octave "
-""""""""""
-augroup filetypedetect
-  au! BufRead,BufNewFile *.m,*.oct set filetype=octave
-augroup END
-
-" Use keywords from Octave syntax language file for autocomplete
-if has("autocmd") && exists("+omnifunc")
-   autocmd Filetype octave
-   \ if &omnifunc == "" |
-   \ setlocal omnifunc=syntaxcomplete#Complete |
-   \ endif
-endif
-
-
-" Templates "
-"""""""""""""
-autocmd FileType html inoremap ;tmp <ESC>:read ~/.vim/templates/template.html<CR>
-autocmd FileType arduino inoremap ;tmp <ESC>:read ~/.vim/templates/template.ino<CR>
-
-" C "
-"""""
-autocmd FileType c inoremap ;main int main(){<CR>}<Esc>ko
-autocmd FileType c inoremap ;{ {<CR>}<Esc>ko
-autocmd FileType c set shiftwidth=2
-autocmd FileType c set tabstop=2
-
-" Python "
-""""""""""
-autocmd FileType python setlocal foldmethod=indent
-
-" Arduino "
-"""""""""""
-let g:vimwiki_ext2syntax = {'.ino': 'arduino'}
-
-" Latex "
-"""""""""
-autocmd FileType tex inoremap ;em \emph{}<++><Esc>T{i
-autocmd FileType tex inoremap ;bf \textbf{}<++><Esc>T{i
-autocmd FileType tex inoremap ;it \textit{}<++><Esc>T{i
-autocmd FileType tex inoremap ;ct \textcite{}<++><Esc>T{i
-autocmd FileType tex inoremap ;cp \parencite{}<++><Esc>T{i
-
-autocmd FileType tex inoremap ;ol \begin{enumerate}<Enter><Enter>\end{enumerate}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap ;ul \begin{itemize}<Enter><Enter>\end{itemize}<Enter><Enter><++><Esc>3kA\item<Space>
-autocmd FileType tex inoremap ;li <Enter>\item<Space>
-
-autocmd FileType tex inoremap ;chap \chapter{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ;sec \section{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ;ssec \subsection{}<Enter><Enter><++><Esc>2kf}i
-autocmd FileType tex inoremap ;sssec \subsubsection{}<Enter><Enter><++><Esc>2kf}i
-
-" Markdown "
-""""""""""""
-let g:vimwiki_ext2syntax = {'.md': 'markdown', '.markdown': 'markdown', '.mdown': 'markdown'}
-map <F5> :!w<Enter>:!pdflatex <C-r>%<Enter>
-autocmd Filetype markdown inoremap ;1 #
-autocmd Filetype markdown inoremap ;2 ##
-autocmd Filetype markdown inoremap ;3 ###
-autocmd Filetype markdown inoremap ;e **<Space><++><ESC>F*i
-autocmd Filetype markdown inoremap ;b ****<Space><++><ESC>F*hi
-autocmd Filetype markdown inoremap ;s ~~~~<Space><++><Esc>F~hi
-autocmd Filetype markdown inoremap ;t $$<Space><++><ESC>F$i
-autocmd Filetype markdown inoremap ;img ![](<++>) <++><ESC>F[a
-autocmd Filetype markdown inoremap ;ca o```arduino<CR><CR>```<CR><++><ESC>kk
-autocmd Filetype markdown inoremap ;cp o```python<CR><CR>```<CR><++><ESC>kk
-autocmd Filetype markdown inoremap ;cb o```bash<CR><CR>```<CR><++><ESC>kk
-autocmd Filetype markdown inoremap ;cc o```c<CR><CR>```<CR><++><ESC>kk
-
-" HTML "
-""""""""
-autocmd FileType html inoremap ;e <em></em><Space><++><ESC>F/hi
-autocmd FileType html inoremap ;b <strong></strong><Space><++><ESC>F/hi
-autocmd FileType html inoremap ;1 <h1></h1><Enter><Enter><++><ESC>F/hi
-autocmd FileType html inoremap ;2 <h2></h2><Enter><Enter><++><ESC>F/hi
-autocmd FileType html inoremap ;3 <h3></h3><Enter><Enter><++><ESC>F/hi
-autocmd FileType html inoremap ;p <p></p><Enter><Enter><++><ESC>kk
-autocmd FileType html inoremap ;a <a<Space>href=""><++></a><Enter><Enter><++><ESC>F/hi
-autocmd FileType html inoremap ;img <img src=""/><Space><++>F"i
-autocmd FileType html inoremap ;ul <ul><Enter><li></li><Enter></ul><Enter><Enter><++><Esc>03kf<i
-autocmd FileType html inoremap ;li <Esc>o<li></li><Esc>F>a
-autocmd FileType html inoremap ;ol <ol><Enter><li></li><Enter></ol><Enter><Enter><++><Esc>03kf<i
-
-" CSS "
-"""""""
-"TODO
-
-" Django "
-""""""""""
-"TODO
-
-" International keys "
-""""""""""""""""""""""
- imap ^e ê
- imap ^a â
- imap ^o ô
- imap ;;e è
- imap ;;a à
- imap ;a ã
- imap ;o õ
-
-" 2 spaces for html javascript
-augroup filetypedetect
-  au! BufRead,BufNewFile *.jsx set filetype=javascript
-augroup END
-
-autocmd FileType html setlocal shiftwidth=2 tabstop=2
-autocmd FileType javascript setlocal shiftwidth=2 tabstop=2
-
-" vIDE "
-""""""""
-nnoremap <leader>L :Lex<cr>
-
-inoremap ;( (<CR>);<C-c>O
-inoremap ,( (<CR>),<C-c>O
-inoremap ;{ {<CR>};<C-c>O
-inoremap ,{ {<CR>},<C-c>O
-inoremap ;[ [<CR>];<C-c>O
-inoremap ,[ [<CR>],<C-c>O
-inoremap :{ () => {<++>}<C-c>F(a
-inoremap :( () => (<++>)<C-c>F(a
-
-map <A-j> nop
-map <A-k> nop
-nnoremap <A-j> :m .+1<CR>==
-nnoremap <A-k> :m .-2<CR>==
-inoremap <A-j> <Esc>:m .+1<CR>==gi
-inoremap <A-k> <Esc>:m .-2<CR>==gi
-vnoremap <A-j> :m '>+1<CR>gv=gv
-vnoremap <A-k> :m '<-2<CR>gv=gv
-
 """"""""""
 ""Layout""
 """"""""""
 
 set background=dark
-highlight Normal ctermfg=none ctermbg=232
-highlight LineNr ctermfg=244
 colorscheme monokai
 
 " Indication for 80 characters width
@@ -370,3 +255,4 @@ autocmd Filetype python let &colorcolumn="72,".join(range(72,9999),",") "line wa
 
 
 highlight ColorColumn ctermbg=none cterm=bold guibg=#2c2d27
+
