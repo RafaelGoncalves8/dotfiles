@@ -1,0 +1,9 @@
+# Button 9 on mouse as scroll up
+"xvkbd -text '\[Page_Up]'"
+b:9
+# Button 8 on mouse as scroll down
+"xvkbd -text '\[Page_Down]'"
+b:8
+# F8 enter
+"xvkbd -no-jump-pointer -xsendevent -text '\r'"
+F8
